@@ -115,6 +115,23 @@ public class Menu implements ActionListener {
         label2.setLocation(100, 200);
         frame.add(label2);
 
+        JTextField sequenceText = new JTextField();
+        sequenceText.setText("Enter in a number from 1-99");
+        sequenceText.setSize(200,100);
+        sequenceText.setLocation(250, 200);
+        frame.add(sequenceText);
+
+        JLabel label3 = new JLabel("Content");
+        label3.setSize(100,100);
+        label3.setLocation(100, 400);
+        frame.add(label3);
+
+        JTextField contentText = new JTextField();
+        contentText.setText("");
+        contentText.setSize(700,100);
+        contentText.setLocation(250, 400);
+        frame.add(contentText);
+
 
         enter.setLocation(800, 700);
         enter.setSize(100,100);
