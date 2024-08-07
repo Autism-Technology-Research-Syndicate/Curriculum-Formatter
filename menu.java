@@ -2,6 +2,8 @@ import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 import javax.swing.*;
 import java.awt.Component;
@@ -10,7 +12,7 @@ import java.lang.Object.*;
 
 public class Menu implements ActionListener {
     private ButtonGroup group = new ButtonGroup();
-    private static JRadioButton j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, j14;
+    private static JRadioButton j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, j14, j15;
     private static JButton enter;
     private static int sequence;
     private static String content;
@@ -19,20 +21,24 @@ public class Menu implements ActionListener {
 
 
     public Menu() {
+        //Setting up input options
         j1 = new JRadioButton("Talking");
         j2 = new JRadioButton("Eye Contact");
         j3 = new JRadioButton("Emotion");
         j4 = new JRadioButton("Typing");
         j5 = new JRadioButton("Multiple Choice");
         j6 = new JRadioButton("Slider");
-        j7 = new JRadioButton("Video Lessons");
-        j8 = new JRadioButton("Reading");
-        j9 = new JRadioButton("Teacher instruction");
-        j10 = new JRadioButton("Pictures/diagrams");
-        j11 = new JRadioButton("Animations of tasks");
-        j12 = new JRadioButton("Conversational AI");
-        j13 = new JRadioButton("Eye contact maintaining virtual avatar");
-        j14 = new JRadioButton("In-person partner finding instruction paired with activity");
+        j7 = new JRadioButton("Pinging host for validating completed activity");
+
+        //Setting up output options
+        j8 = new JRadioButton("Video Lessons");
+        j9 = new JRadioButton("Reading");
+        j10 = new JRadioButton("Teacher instruction");
+        j11 = new JRadioButton("Pictures/diagrams");
+        j12 = new JRadioButton("Animations of tasks");
+        j13 = new JRadioButton("Conversational AI");
+        j14 = new JRadioButton("Eye contact maintaining virtual avatar");
+        j15 = new JRadioButton("In-person partner finding instruction paired with activity");
 
         enter = new JButton("Enter");
 
@@ -50,6 +56,7 @@ public class Menu implements ActionListener {
         group.add(j12);
         group.add(j13);
         group.add(j14);
+        group.add(j15);
 
         enter.addActionListener(this);
 
@@ -85,15 +92,18 @@ public class Menu implements ActionListener {
         j3.setBounds(550, 0, 120, 50);
         j4.setBounds(700, 0, 120, 50);
         j5.setBounds(825, 0, 120, 50);
+
         j6.setBounds(250, 50, 120, 50);
         j7.setBounds(400, 50, 120, 50);
         j8.setBounds(550, 50, 120, 50);
         j9.setBounds(675, 50, 120, 50);
         j10.setBounds(825, 50, 120, 50);
+
         j11.setBounds(250, 100, 120, 50);
         j12.setBounds(400, 100, 120, 50);
         j13.setBounds(550, 100, 120, 50);
         j14.setBounds(675, 100, 120, 50);
+        j15.setBounds(825, 100, 120, 50);
         
 
         frame.add(j1);
@@ -110,6 +120,7 @@ public class Menu implements ActionListener {
         frame.add(j12);
         frame.add(j13);
         frame.add(j14);
+        frame.add(j15);
 
         JLabel label2 = new JLabel("Sequence");
         label2.setSize(100,100);
@@ -145,7 +156,9 @@ public class Menu implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         int curriculumNum = 0;
         System.out.println("Sequence: " + sequenceText.getText());
+        sequence = Integer.parseInt(sequenceText.getText());
         System.out.println("Content: " + contentText.getText());
+        content = contentText.getText();
 
         if (j1.isSelected() == true) {
             System.out.println("Curriculum: " + j1.getText());
@@ -203,9 +216,33 @@ public class Menu implements ActionListener {
             System.out.println("Curriculum: " + j14.getText());
             curriculumNum = 27;
         }
+        else if (j15.isSelected() == true) {
+            System.out.println("Curriculum: " + j15.getText());
+            curriculumNum = 27;
+        }
         else {
             System.out.println("No Curriculum chosen.");
         }
+
+        String format = "";
+        format = curriculumNum + "";
+        format = format + sequence;
+        format = format + content;
+        System.out.println(format);
+
+        try {
+            saveFormatToExportFile(format);
+        } catch (FileNotFoundException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        
+    }
+
+    public void saveFormatToExportFile(String format) throws FileNotFoundException {
+        PrintWriter printWriter = new PrintWriter("export.txt");
+        printWriter.write(format);
+        printWriter.close();
     }
     
 }
