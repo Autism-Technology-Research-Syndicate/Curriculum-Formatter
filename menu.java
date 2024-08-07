@@ -14,6 +14,8 @@ public class Menu implements ActionListener {
     private static JButton enter;
     private static int sequence;
     private static String content;
+    private static JTextField sequenceText;
+    private static JTextField contentText;
 
 
     public Menu() {
@@ -59,7 +61,6 @@ public class Menu implements ActionListener {
         
         setUpGUI();
 
-        
     }
 
     public static void setUpGUI() {
@@ -115,8 +116,8 @@ public class Menu implements ActionListener {
         label2.setLocation(100, 200);
         frame.add(label2);
 
-        JTextField sequenceText = new JTextField();
-        sequenceText.setText("Enter in a number from 1-99");
+        sequenceText = new JTextField();
+        sequenceText.setText("");
         sequenceText.setSize(200,100);
         sequenceText.setLocation(250, 200);
         frame.add(sequenceText);
@@ -126,7 +127,7 @@ public class Menu implements ActionListener {
         label3.setLocation(100, 400);
         frame.add(label3);
 
-        JTextField contentText = new JTextField();
+        contentText = new JTextField();
         contentText.setText("");
         contentText.setSize(700,100);
         contentText.setLocation(250, 400);
@@ -142,8 +143,69 @@ public class Menu implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        System.out.println("Test");
+        int curriculumNum = 0;
+        System.out.println("Sequence: " + sequenceText.getText());
+        System.out.println("Content: " + contentText.getText());
+
+        if (j1.isSelected() == true) {
+            System.out.println("Curriculum: " + j1.getText());
+            curriculumNum = 11;
+        }
+        else if (j2.isSelected() == true) {
+            System.out.println("Curriculum: " + j2.getText());
+            curriculumNum = 12;
+        }
+        else if (j3.isSelected() == true) {
+            System.out.println("Curriculum: " + j3.getText());
+            curriculumNum = 13;
+        }
+        else if (j4.isSelected() == true) {
+            System.out.println("Curriculum: " + j4.getText());
+            curriculumNum = 14;
+        }
+        else if (j5.isSelected() == true) {
+            System.out.println("Curriculum: " + j5.getText());
+            curriculumNum = 15;
+        }
+        else if (j6.isSelected() == true) {
+            System.out.println("Curriculum: " + j6.getText());
+            curriculumNum = 16;
+        }
+        else if (j7.isSelected() == true) {
+            System.out.println("Curriculum: " + j7.getText());
+            curriculumNum = 17;
+        }
+        else if (j8.isSelected() == true) {
+            System.out.println("Curriculum: " + j8.getText());
+            curriculumNum = 21;
+        }
+        else if (j9.isSelected() == true) {
+            System.out.println("Curriculum: " + j9.getText());
+            curriculumNum = 22;
+        }
+        else if (j10.isSelected() == true) {
+            System.out.println("Curriculum: " + j10.getText());
+            curriculumNum = 23;
+        }
+        else if (j11.isSelected() == true) {
+            System.out.println("Curriculum: " + j11.getText());
+            curriculumNum = 24;
+        }
+        else if (j12.isSelected() == true) {
+            System.out.println("Curriculum: " + j12.getText());
+            curriculumNum = 25;
+        }
+        else if (j13.isSelected() == true) {
+            System.out.println("Curriculum: " + j13.getText());
+            curriculumNum = 26;
+        }
+        else if (j14.isSelected() == true) {
+            System.out.println("Curriculum: " + j14.getText());
+            curriculumNum = 27;
+        }
+        else {
+            System.out.println("No Curriculum chosen.");
+        }
     }
     
 }
