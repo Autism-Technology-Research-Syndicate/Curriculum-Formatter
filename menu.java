@@ -1,8 +1,12 @@
 import java.awt.BorderLayout;
 import java.awt.Button;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.swing.*;
@@ -90,7 +94,7 @@ public class Menu implements ActionListener {
         j1.setBounds(250, 0, 120, 50);
         j2.setBounds(400, 0, 120, 50);
         j3.setBounds(550, 0, 120, 50);
-        j4.setBounds(700, 0, 120, 50);
+        j4.setBounds(675, 0, 120, 50);
         j5.setBounds(825, 0, 120, 50);
 
         j6.setBounds(250, 50, 120, 50);
@@ -104,7 +108,25 @@ public class Menu implements ActionListener {
         j13.setBounds(550, 100, 120, 50);
         j14.setBounds(675, 100, 120, 50);
         j15.setBounds(825, 100, 120, 50);
+
+        Color color2 = new Color(216, 215, 249);
         
+        j1.setBackground(color2);
+        j2.setBackground(color2);
+        j3.setBackground(color2);
+        j4.setBackground(color2);
+        j5.setBackground(color2);
+        j6.setBackground(color2);
+        j7.setBackground(color2);
+        j8.setBackground(color2);
+        j9.setBackground(color2);
+        j10.setBackground(color2);
+        j11.setBackground(color2);
+        j12.setBackground(color2);
+        j13.setBackground(color2);
+        j14.setBackground(color2);
+        j15.setBackground(color2);
+
 
         frame.add(j1);
         frame.add(j2);
@@ -149,6 +171,9 @@ public class Menu implements ActionListener {
         enter.setSize(100,100);
 
         frame.add(enter);
+
+        Color color1 = new Color(169, 192, 232);
+        frame.getContentPane().setBackground(color1);
         
     }
 
@@ -226,23 +251,28 @@ public class Menu implements ActionListener {
 
         String format = "";
         format = curriculumNum + "";
-        format = format + sequence;
+
+        if (sequence < 10) {
+            format = format + "0" + sequence;
+        } else {
+            format = format + sequence;
+        }
         format = format + content;
         System.out.println(format);
 
         try {
             saveFormatToExportFile(format);
-        } catch (FileNotFoundException e1) {
+        } catch (IOException e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
         
     }
 
-    public void saveFormatToExportFile(String format) throws FileNotFoundException {
-        PrintWriter printWriter = new PrintWriter("export.txt");
-        printWriter.write(format);
-        printWriter.close();
+    public void saveFormatToExportFile(String format) throws IOException {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("export.txt", true));
+            writer.write(format + '\n');
+            writer.close();
     }
     
 }
