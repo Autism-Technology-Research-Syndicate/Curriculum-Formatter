@@ -23,6 +23,12 @@ public class Menu implements ActionListener {
     private static JTextField sequenceText;
     private static JTextField contentText;
 
+    private static JTextField option1Text;
+    private static JTextField option2Text;
+    private static JTextField option3Text;
+    private static JTextField option4Text;
+
+    private static String options;
 
     public Menu() {
         //Setting up input options
@@ -166,6 +172,39 @@ public class Menu implements ActionListener {
         contentText.setLocation(250, 400);
         frame.add(contentText);
 
+        option1Text = new JTextField();
+        option1Text.setText("");
+        option1Text.setSize(150,50);
+        option1Text.setLocation(250, 400);
+        option1Text.setBackground(new Color(56, 163, 165));
+        option1Text.setEnabled(false);
+        option1Text.setVisible(false);
+        frame.add(option1Text);
+
+        option2Text = new JTextField();
+        option2Text.setText("");
+        option2Text.setSize(150,50);
+        option2Text.setLocation(400, 400);
+        option2Text.setEnabled(false);
+        option2Text.setVisible(false);
+        frame.add(option2Text);
+
+        option3Text = new JTextField();
+        option3Text.setText("");
+        option3Text.setSize(150,50);
+        option3Text.setLocation(550, 400);
+        option3Text.setEnabled(false);
+        option3Text.setVisible(false);
+        frame.add(option3Text);
+
+        option4Text = new JTextField();
+        option4Text.setText("");
+        option4Text.setSize(150,50);
+        option4Text.setLocation(700, 400);
+        option4Text.setEnabled(false);
+        option4Text.setVisible(false);
+        frame.add(option4Text);
+
 
         enter.setLocation(800, 700);
         enter.setSize(100,100);
@@ -174,6 +213,41 @@ public class Menu implements ActionListener {
 
         Color color1 = new Color(169, 192, 232);
         frame.getContentPane().setBackground(color1);
+
+        while (frame.isActive()) {
+            if (j5.isSelected()) {
+                contentText.setLocation(250, 500);
+
+                option1Text.setEnabled(true);
+                option1Text.setVisible(true);
+
+                option2Text.setEnabled(true);
+                option2Text.setVisible(true);
+
+                option3Text.setEnabled(true);
+                option3Text.setVisible(true);
+
+                option4Text.setEnabled(true);
+                option4Text.setVisible(true);
+
+            } else {
+                contentText.setEnabled(true);
+                contentText.setVisible(true);
+                contentText.setLocation(250, 400);
+
+                option1Text.setEnabled(false);
+                option1Text.setVisible(false);
+
+                option2Text.setEnabled(false);
+                option2Text.setVisible(false);
+
+                option3Text.setEnabled(false);
+                option3Text.setVisible(false);
+
+                option4Text.setEnabled(false);
+                option4Text.setVisible(false);
+            }
+        }
         
     }
 
@@ -257,7 +331,16 @@ public class Menu implements ActionListener {
         } else {
             format = format + sequence;
         }
-        format = format + content;
+
+        if (j5.isSelected()) {
+            options = "a)" + option1Text.getText() + "b)" + option2Text.getText() + 
+            "c)" + option3Text.getText() + "d)" + option4Text.getText();
+            format = format + options;
+            format = format + content;
+        } else {
+            format = format + content;
+        }
+        
         System.out.println(format);
 
         try {
