@@ -1,18 +1,15 @@
-import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Scanner;
 
 import javax.swing.*;
-import java.awt.Component;
-import java.awt.GridLayout;
-import java.lang.Object.*;
 
 public class Menu implements ActionListener {
     private ButtonGroup group = new ButtonGroup();
@@ -22,6 +19,7 @@ public class Menu implements ActionListener {
     private static String content;
     private static JTextField sequenceText;
     private static JTextField contentText;
+    private static int seqNum;
 
     private static JTextField option1Text;
     private static JTextField option2Text;
@@ -74,7 +72,14 @@ public class Menu implements ActionListener {
         content = "";
     }
 
-    public static void main (String arg[]) {
+    public static void main (String arg[]) throws FileNotFoundException {
+
+        File seqNumFile = new File("seqNumber.txt");
+        Scanner reader = new Scanner(seqNumFile);
+        int data = reader.nextInt();
+        System.out.println(data);
+        seqNum = data;
+        reader.close();
         
         setUpGUI();
 
@@ -255,7 +260,21 @@ public class Menu implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         int curriculumNum = 0;
         System.out.println("Sequence: " + sequenceText.getText());
-        sequence = Integer.parseInt(sequenceText.getText());
+
+        if (sequenceText.getText().equals("")) {
+            sequence = seqNum + 1;
+            seqNum = seqNum + 1;
+            try {
+                saveSeqNum();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
+        } else {
+            sequence = Integer.parseInt(sequenceText.getText());
+        }
+
+        
         System.out.println("Content: " + contentText.getText());
         content = contentText.getText();
 
@@ -356,6 +375,14 @@ public class Menu implements ActionListener {
             BufferedWriter writer = new BufferedWriter(new FileWriter("export.txt", true));
             writer.write(format + '\n');
             writer.close();
+    }
+
+    public void saveSeqNum() throws IOException {
+        System.out.println(seqNum);
+        PrintWriter printWriter = new PrintWriter("seqNumber.txt");
+        String newEntry = Integer.toString(seqNum);
+        printWriter.write(newEntry);
+        printWriter.close();
     }
     
 }
