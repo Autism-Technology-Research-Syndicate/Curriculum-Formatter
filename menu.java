@@ -210,6 +210,12 @@ public class Menu implements ActionListener {
         option4Text.setVisible(false);
         frame.add(option4Text);
 
+        JLabel question = new JLabel("Question");
+        question.setSize(100,100);
+        question.setLocation(100, 500);
+        question.setVisible(false);
+        frame.add(question);
+
 
         enter.setLocation(800, 700);
         enter.setSize(100,100);
@@ -235,6 +241,8 @@ public class Menu implements ActionListener {
                 option4Text.setEnabled(true);
                 option4Text.setVisible(true);
 
+                question.setVisible(true);
+
             } else {
                 contentText.setEnabled(true);
                 contentText.setVisible(true);
@@ -251,6 +259,8 @@ public class Menu implements ActionListener {
 
                 option4Text.setEnabled(false);
                 option4Text.setVisible(false);
+
+                question.setVisible(false);
             }
         }
         
