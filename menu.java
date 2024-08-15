@@ -375,9 +375,16 @@ public class Menu implements ActionListener {
         try {
             saveFormatToExportFile(format);
         } catch (IOException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
         }
+
+        group.clearSelection();
+        sequenceText.setText("");
+        contentText.setText("");
+        option1Text.setText("");
+        option2Text.setText("");
+        option3Text.setText("");
+        option4Text.setText("");
         
     }
 
