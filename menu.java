@@ -1,12 +1,17 @@
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.*;
@@ -72,12 +77,12 @@ public class Menu implements ActionListener {
         content = "";
     }
 
-    public static void main (String arg[]) throws FileNotFoundException {
+    public static void main (String arg[]) throws IOException {
 
         File seqNumFile = new File("seqNumber.txt");
         Scanner reader = new Scanner(seqNumFile);
         int data = reader.nextInt();
-        System.out.println(data);
+        //System.out.println(data);
         seqNum = data;
         reader.close();
         
@@ -85,11 +90,22 @@ public class Menu implements ActionListener {
 
     }
 
-    public static void setUpGUI() {
+    public static void setUpGUI() throws IOException {
         Menu menu = new Menu();
 
 
         JFrame frame = new JFrame("SEAL App GUI");
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                try {
+                    deleteDuplicates();
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -263,6 +279,8 @@ public class Menu implements ActionListener {
                 question.setVisible(false);
             }
         }
+
+        deleteDuplicates();
         
     }
 
@@ -282,6 +300,12 @@ public class Menu implements ActionListener {
 
         } else {
             sequence = Integer.parseInt(sequenceText.getText());
+            seqNum = sequence;
+            try {
+                saveSeqNum();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
 
         
@@ -400,6 +424,26 @@ public class Menu implements ActionListener {
         String newEntry = Integer.toString(seqNum);
         printWriter.write(newEntry);
         printWriter.close();
+    }
+
+    public static void deleteDuplicates() throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader("export.txt"));     
+        if (br.readLine() == null) {
+            System.out.println("No errors, and file empty");
+            br.close();
+        } else {
+            br.close();
+            File file = new File("export.txt");
+            Scanner reader = new Scanner(file);
+            ArrayList<String> list = new ArrayList<>();
+            ArrayList<String> duplicates = new ArrayList<>();
+
+            while (reader.hasNextLine()) {
+                list.add(reader.nextLine());
+            }
+            reader.close();
+        }
+       
     }
     
 }
