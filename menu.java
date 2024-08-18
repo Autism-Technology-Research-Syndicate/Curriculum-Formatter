@@ -442,6 +442,42 @@ public class Menu implements ActionListener {
                 list.add(reader.nextLine());
             }
             reader.close();
+
+            System.out.println(list.size());
+
+            for (int x = 0; x < list.size(); x++) {
+                int count = 0;
+                for (int y = 0; y < list.size(); y++) {
+                    if (list.get(y).substring(2, 4).equals(list.get(x).subSequence(2, 4))) {
+                        count++;
+                    }
+                    if (count > 1) {
+                        System.out.println("Duplicate found");
+                        duplicates.add(list.get(y));
+                        list.remove(y);
+                        y--;
+                        count--;
+                    }
+                }
+            }
+
+            System.out.println(list.toString());
+            System.out.println(duplicates.toString());
+
+            File errorFile = new File("export.txt");
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter("error.txt", false));
+            for (int x = 0; x < duplicates.size(); x++) {
+                writer.write(duplicates.get(x).substring(4) + '\n');
+            }
+            writer.close();
+
+            BufferedWriter writer2 = new BufferedWriter(new FileWriter("export.txt", false));
+            for (int x = 0; x < list.size(); x++) {
+                writer2.write(list.get(x) + '\n');
+            }
+            writer2.close();
+
         }
        
     }
