@@ -289,126 +289,140 @@ public class Menu implements ActionListener {
         int curriculumNum = 0;
         System.out.println("Sequence: " + sequenceText.getText());
 
-        if (sequenceText.getText().equals("")) {
-            sequence = seqNum + 1;
-            seqNum = seqNum + 1;
+        if (Integer.parseInt(sequenceText.getText()) > 99) {
+            System.out.println("Invalid Sequence");
+
+            group.clearSelection();
+            sequenceText.setText("");
+            contentText.setText("");
+            option1Text.setText("");
+            option2Text.setText("");
+            option3Text.setText("");
+            option4Text.setText("");
+        } else {
+            if (sequenceText.getText().equals("")) {
+                sequence = seqNum + 1;
+                seqNum = seqNum + 1;
+                try {
+                    saveSeqNum();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+    
+            } else {
+                sequence = Integer.parseInt(sequenceText.getText());
+                seqNum = sequence;
+                try {
+                    saveSeqNum();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+    
+            
+            System.out.println("Content: " + contentText.getText());
+            content = contentText.getText();
+    
+            if (j1.isSelected() == true) {
+                System.out.println("Curriculum: " + j1.getText());
+                curriculumNum = 11;
+            }
+            else if (j2.isSelected() == true) {
+                System.out.println("Curriculum: " + j2.getText());
+                curriculumNum = 12;
+            }
+            else if (j3.isSelected() == true) {
+                System.out.println("Curriculum: " + j3.getText());
+                curriculumNum = 13;
+            }
+            else if (j4.isSelected() == true) {
+                System.out.println("Curriculum: " + j4.getText());
+                curriculumNum = 14;
+            }
+            else if (j5.isSelected() == true) {
+                System.out.println("Curriculum: " + j5.getText());
+                curriculumNum = 15;
+            }
+            else if (j6.isSelected() == true) {
+                System.out.println("Curriculum: " + j6.getText());
+                curriculumNum = 16;
+            }
+            else if (j7.isSelected() == true) {
+                System.out.println("Curriculum: " + j7.getText());
+                curriculumNum = 17;
+            }
+            else if (j8.isSelected() == true) {
+                System.out.println("Curriculum: " + j8.getText());
+                curriculumNum = 21;
+            }
+            else if (j9.isSelected() == true) {
+                System.out.println("Curriculum: " + j9.getText());
+                curriculumNum = 22;
+            }
+            else if (j10.isSelected() == true) {
+                System.out.println("Curriculum: " + j10.getText());
+                curriculumNum = 23;
+            }
+            else if (j11.isSelected() == true) {
+                System.out.println("Curriculum: " + j11.getText());
+                curriculumNum = 24;
+            }
+            else if (j12.isSelected() == true) {
+                System.out.println("Curriculum: " + j12.getText());
+                curriculumNum = 25;
+            }
+            else if (j13.isSelected() == true) {
+                System.out.println("Curriculum: " + j13.getText());
+                curriculumNum = 26;
+            }
+            else if (j14.isSelected() == true) {
+                System.out.println("Curriculum: " + j14.getText());
+                curriculumNum = 27;
+            }
+            else if (j15.isSelected() == true) {
+                System.out.println("Curriculum: " + j15.getText());
+                curriculumNum = 27;
+            }
+            else {
+                System.out.println("No Curriculum chosen.");
+            }
+    
+            String format = "";
+            format = curriculumNum + "";
+    
+            if (sequence < 10) {
+                format = format + "0" + sequence;
+            } else {
+                format = format + sequence;
+            }
+    
+            if (j5.isSelected()) {
+                options = "a)" + option1Text.getText() + "b)" + option2Text.getText() + 
+                "c)" + option3Text.getText() + "d)" + option4Text.getText();
+                format = format + options;
+                format = format + content;
+            } else {
+                format = format + content;
+            }
+            
+            System.out.println(format);
+    
             try {
-                saveSeqNum();
+                saveFormatToExportFile(format);
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-
-        } else {
-            sequence = Integer.parseInt(sequenceText.getText());
-            seqNum = sequence;
-            try {
-                saveSeqNum();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+    
+            group.clearSelection();
+            sequenceText.setText("");
+            contentText.setText("");
+            option1Text.setText("");
+            option2Text.setText("");
+            option3Text.setText("");
+            option4Text.setText("");
         }
 
         
-        System.out.println("Content: " + contentText.getText());
-        content = contentText.getText();
-
-        if (j1.isSelected() == true) {
-            System.out.println("Curriculum: " + j1.getText());
-            curriculumNum = 11;
-        }
-        else if (j2.isSelected() == true) {
-            System.out.println("Curriculum: " + j2.getText());
-            curriculumNum = 12;
-        }
-        else if (j3.isSelected() == true) {
-            System.out.println("Curriculum: " + j3.getText());
-            curriculumNum = 13;
-        }
-        else if (j4.isSelected() == true) {
-            System.out.println("Curriculum: " + j4.getText());
-            curriculumNum = 14;
-        }
-        else if (j5.isSelected() == true) {
-            System.out.println("Curriculum: " + j5.getText());
-            curriculumNum = 15;
-        }
-        else if (j6.isSelected() == true) {
-            System.out.println("Curriculum: " + j6.getText());
-            curriculumNum = 16;
-        }
-        else if (j7.isSelected() == true) {
-            System.out.println("Curriculum: " + j7.getText());
-            curriculumNum = 17;
-        }
-        else if (j8.isSelected() == true) {
-            System.out.println("Curriculum: " + j8.getText());
-            curriculumNum = 21;
-        }
-        else if (j9.isSelected() == true) {
-            System.out.println("Curriculum: " + j9.getText());
-            curriculumNum = 22;
-        }
-        else if (j10.isSelected() == true) {
-            System.out.println("Curriculum: " + j10.getText());
-            curriculumNum = 23;
-        }
-        else if (j11.isSelected() == true) {
-            System.out.println("Curriculum: " + j11.getText());
-            curriculumNum = 24;
-        }
-        else if (j12.isSelected() == true) {
-            System.out.println("Curriculum: " + j12.getText());
-            curriculumNum = 25;
-        }
-        else if (j13.isSelected() == true) {
-            System.out.println("Curriculum: " + j13.getText());
-            curriculumNum = 26;
-        }
-        else if (j14.isSelected() == true) {
-            System.out.println("Curriculum: " + j14.getText());
-            curriculumNum = 27;
-        }
-        else if (j15.isSelected() == true) {
-            System.out.println("Curriculum: " + j15.getText());
-            curriculumNum = 27;
-        }
-        else {
-            System.out.println("No Curriculum chosen.");
-        }
-
-        String format = "";
-        format = curriculumNum + "";
-
-        if (sequence < 10) {
-            format = format + "0" + sequence;
-        } else {
-            format = format + sequence;
-        }
-
-        if (j5.isSelected()) {
-            options = "a)" + option1Text.getText() + "b)" + option2Text.getText() + 
-            "c)" + option3Text.getText() + "d)" + option4Text.getText();
-            format = format + options;
-            format = format + content;
-        } else {
-            format = format + content;
-        }
-        
-        System.out.println(format);
-
-        try {
-            saveFormatToExportFile(format);
-        } catch (IOException e1) {
-            e1.printStackTrace();
-        }
-
-        group.clearSelection();
-        sequenceText.setText("");
-        contentText.setText("");
-        option1Text.setText("");
-        option2Text.setText("");
-        option3Text.setText("");
-        option4Text.setText("");
         
     }
 
@@ -478,8 +492,12 @@ public class Menu implements ActionListener {
             }
             writer2.close();
 
-        }
        
+    }
+}
+
+    public void insertSeq(int oldSeq, int newSeq) {
+        
     }
     
 }
