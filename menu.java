@@ -33,6 +33,8 @@ public class Menu implements ActionListener {
 
     private static String options;
 
+    private static JLabel messageText;
+
     public Menu() {
         //Setting up input options
         j1 = new JRadioButton("Talking");
@@ -95,17 +97,6 @@ public class Menu implements ActionListener {
 
 
         JFrame frame = new JFrame("SEAL App GUI");
-        frame.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                try {
-                    deleteDuplicates();
-                } catch (FileNotFoundException e1) {
-                    e1.printStackTrace();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        });
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -181,6 +172,11 @@ public class Menu implements ActionListener {
         sequenceText.setSize(200,100);
         sequenceText.setLocation(250, 200);
         frame.add(sequenceText);
+
+        messageText = new JLabel("");
+        messageText.setSize(400,100);
+        messageText.setLocation(500, 200);
+        frame.add(messageText);
 
         JLabel label3 = new JLabel("Content");
         label3.setSize(100,100);
@@ -279,9 +275,8 @@ public class Menu implements ActionListener {
                 question.setVisible(false);
             }
         }
-
-        deleteDuplicates();
         
+        deleteDuplicates();
     }
 
     @Override
@@ -290,7 +285,8 @@ public class Menu implements ActionListener {
         System.out.println("Sequence: " + sequenceText.getText());
 
         if (Integer.parseInt(sequenceText.getText()) > 99) {
-            System.out.println("Invalid Sequence");
+
+            messageText.setText("Sequence can't be more than 99");
 
             group.clearSelection();
             sequenceText.setText("");
@@ -421,8 +417,6 @@ public class Menu implements ActionListener {
             option3Text.setText("");
             option4Text.setText("");
         }
-
-        
         
     }
 
@@ -466,7 +460,6 @@ public class Menu implements ActionListener {
                         count++;
                     }
                     if (count > 1) {
-                        System.out.println("Duplicate found");
                         duplicates.add(list.get(y));
                         list.remove(y);
                         y--;
@@ -478,9 +471,7 @@ public class Menu implements ActionListener {
             System.out.println(list.toString());
             System.out.println(duplicates.toString());
 
-            File errorFile = new File("export.txt");
-
-            BufferedWriter writer = new BufferedWriter(new FileWriter("error.txt", false));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("error.txt", true));
             for (int x = 0; x < duplicates.size(); x++) {
                 writer.write(duplicates.get(x).substring(4) + '\n');
             }
@@ -491,13 +482,9 @@ public class Menu implements ActionListener {
                 writer2.write(list.get(x) + '\n');
             }
             writer2.close();
-
        
+        }
     }
-}
 
-    public void insertSeq(int oldSeq, int newSeq) {
-        
-    }
     
 }
