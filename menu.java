@@ -55,6 +55,7 @@ public class Menu implements ActionListener {
         j14 = new JRadioButton("Eye contact maintaining virtual avatar");
         j15 = new JRadioButton("In-person partner finding instruction paired with activity");
 
+        //Setting up Enter button.
         enter = new JButton("Enter");
 
         group.add(j1);
@@ -92,11 +93,27 @@ public class Menu implements ActionListener {
 
     }
 
+    /**
+     * This method sets up the GUI which creates and stores the content, sequence, and option
+     * number into the export.txt file in the appropriate format.
+     * @throws IOException
+     */
     public static void setUpGUI() throws IOException {
         Menu menu = new Menu();
 
 
         JFrame frame = new JFrame("SEAL App GUI");
+        frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                try {
+                    deleteDuplicates();
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        });
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
@@ -307,6 +324,13 @@ public class Menu implements ActionListener {
     
             } else {
                 sequence = Integer.parseInt(sequenceText.getText());
+                try {
+                    insertSequence(seqNum, sequence);
+                } catch (FileNotFoundException e1) {
+                    e1.printStackTrace();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
                 seqNum = sequence;
                 try {
                     saveSeqNum();
@@ -420,12 +444,21 @@ public class Menu implements ActionListener {
         
     }
 
+    /**
+     * This method saves the given format into the export.txt at the bottom of the file.
+     * @param format - The format created by the GUI.
+     * @throws IOException
+     */
     public void saveFormatToExportFile(String format) throws IOException {
             BufferedWriter writer = new BufferedWriter(new FileWriter("export.txt", true));
             writer.write(format + '\n');
             writer.close();
     }
 
+    /**
+     * This method saves the recent sequence number into the seqNumber.txt.
+     * @throws IOException
+     */
     public void saveSeqNum() throws IOException {
         System.out.println(seqNum);
         PrintWriter printWriter = new PrintWriter("seqNumber.txt");
@@ -434,6 +467,11 @@ public class Menu implements ActionListener {
         printWriter.close();
     }
 
+    /**
+     * This method deletes any duplicates found in the export.txt if they have the same sequence
+     * number and stores the content of the duplicates in the error.txt file.
+     * @throws IOException
+     */
     public static void deleteDuplicates() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("export.txt"));     
         if (br.readLine() == null) {
@@ -484,6 +522,57 @@ public class Menu implements ActionListener {
             writer2.close();
        
         }
+    }
+
+    /**
+     * This method moves the sequence of the existing formats up by 1 if the newest sequence
+     * is greater than the number found in the seqNumber.txt file.
+     * @param oldNum
+     * @param newNum
+     * @throws IOException
+     */
+    public void insertSequence(int oldNum, int newNum) throws IOException {
+        System.out.println("Testing");
+        System.out.println("Old num: " + oldNum);
+        System.out.println("New num: " + newNum);
+
+        File file = new File("export.txt");
+        Scanner reader = new Scanner(file);
+        ArrayList<String> entries = new ArrayList<>();
+
+        while (reader.hasNextLine()) {
+            entries.add(reader.nextLine());
+        }
+
+        reader.close();
+
+        System.out.println(entries.toString());
+
+        if (newNum < oldNum) {
+            for (int x = 0; x < entries.size(); x++) {
+                String entry = entries.get(x);
+                String newEntry = "";
+                int result = 0;
+
+                result = Integer.parseInt((String) entry.subSequence(2, 4)) + 1;
+
+                if (result < 10) {
+                    newEntry = entry.substring(0,2) + "0" + result + entry.substring(4);
+                } else {
+                    newEntry = entry.substring(0,2) + result + entry.substring(4);
+                }
+
+                entries.set(x, newEntry);
+            }
+        }
+
+        System.out.println(entries.toString());
+
+        BufferedWriter writer3 = new BufferedWriter(new FileWriter("export.txt", false));
+            for (int x = 0; x < entries.size(); x++) {
+                writer3.write(entries.get(x) + '\n');
+            }
+        writer3.close();
     }
 
     
