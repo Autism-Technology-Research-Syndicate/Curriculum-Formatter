@@ -16,10 +16,11 @@ import java.util.Scanner;
 
 import javax.swing.*;
 
-public class Menu implements ActionListener {
+public class menu implements ActionListener {
     private ButtonGroup group = new ButtonGroup();
     private static JRadioButton j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, j14, j15;
     private static JButton enter;
+    private static JButton nextPage;
     private static int sequence;
     private static String content;
     private static JTextField sequenceText;
@@ -35,7 +36,7 @@ public class Menu implements ActionListener {
 
     private static JLabel messageText;
 
-    public Menu() {
+    public menu() {
         //Setting up input options
         j1 = new JRadioButton("Talking");
         j2 = new JRadioButton("Eye Contact");
@@ -57,6 +58,7 @@ public class Menu implements ActionListener {
 
         //Setting up Enter button.
         enter = new JButton("Enter");
+        nextPage = new JButton("Next Page");
 
         group.add(j1);
         group.add(j2);
@@ -75,6 +77,7 @@ public class Menu implements ActionListener {
         group.add(j15);
 
         enter.addActionListener(this);
+        //nextPage.addActionListener(this);
 
         sequence = 0;
         content = "";
@@ -99,7 +102,7 @@ public class Menu implements ActionListener {
      * @throws IOException
      */
     public static void setUpGUI() throws IOException {
-        Menu menu = new Menu();
+        menu menu = new menu();
 
 
         JFrame frame = new JFrame("SEAL App GUI");
@@ -249,7 +252,11 @@ public class Menu implements ActionListener {
         enter.setLocation(800, 700);
         enter.setSize(100,100);
 
+        nextPage.setLocation(100, 700);
+        nextPage.setSize(100, 100);
+
         frame.add(enter);
+        //frame.add(nextPage);
 
         Color color1 = new Color(169, 192, 232);
         frame.getContentPane().setBackground(color1);
@@ -301,27 +308,27 @@ public class Menu implements ActionListener {
         int curriculumNum = 0;
         System.out.println("Sequence: " + sequenceText.getText());
 
-        if (Integer.parseInt(sequenceText.getText()) > 99) {
+        if (sequenceText.getText().equals("")) {
+            sequence = seqNum + 1;
+            seqNum = seqNum + 1;
+            try {
+                saveSeqNum();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
 
-            messageText.setText("Sequence can't be more than 99");
-
-            group.clearSelection();
-            sequenceText.setText("");
-            contentText.setText("");
-            option1Text.setText("");
-            option2Text.setText("");
-            option3Text.setText("");
-            option4Text.setText("");
         } else {
-            if (sequenceText.getText().equals("")) {
-                sequence = seqNum + 1;
-                seqNum = seqNum + 1;
-                try {
-                    saveSeqNum();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+            if (Integer.parseInt(sequenceText.getText()) > 99) {
+
+                messageText.setText("Sequence can't be more than 99");
     
+                group.clearSelection();
+                sequenceText.setText("");
+                contentText.setText("");
+                option1Text.setText("");
+                option2Text.setText("");
+                option3Text.setText("");
+                option4Text.setText("");
             } else {
                 sequence = Integer.parseInt(sequenceText.getText());
                 try {
@@ -338,6 +345,7 @@ public class Menu implements ActionListener {
                     e1.printStackTrace();
                 }
             }
+            
     
             
             System.out.println("Content: " + contentText.getText());

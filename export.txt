@@ -1,7 +1,5 @@
-1202This is a test.
-1635What is going on?
-2404What's the number shown in the photo?
-1624Test
-1203Blank
-1407Testing
-1105This is test number 2.
+1204This is a test.
+1637What is going on?
+2406What's the number shown in the photo?
+1626Test
+1205Blank
