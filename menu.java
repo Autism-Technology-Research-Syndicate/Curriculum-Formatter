@@ -36,6 +36,12 @@ public class menu {
 
     private static JLabel messageText;
 
+    private static int pageState;
+
+    private static JLabel label1;
+    private static JLabel label2;
+    private static JLabel label3;
+
     public menu() {
         //Setting up input options
         j1 = new JRadioButton("Talking");
@@ -232,12 +238,145 @@ public class menu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("New Page");
+
+                if (pageState == 0) {
+                    j1.setVisible(false);
+                    j1.setEnabled(false);
+
+                    j2.setVisible(false);
+                    j2.setEnabled(false);
+
+                    j3.setVisible(false);
+                    j3.setEnabled(false);
+
+                    j4.setVisible(false);
+                    j4.setEnabled(false);
+
+                    j5.setVisible(false);
+                    j5.setEnabled(false);
+
+                    j6.setVisible(false);
+                    j6.setEnabled(false);
+
+                    j7.setVisible(false);
+                    j7.setEnabled(false);
+
+                    j8.setVisible(false);
+                    j8.setEnabled(false);
+
+                    j9.setVisible(false);
+                    j9.setEnabled(false);
+
+                    j10.setVisible(false);
+                    j10.setEnabled(false);
+
+                    j11.setVisible(false);
+                    j11.setEnabled(false);
+
+                    j12.setVisible(false);
+                    j12.setEnabled(false);
+
+                    j13.setVisible(false);
+                    j13.setEnabled(false);
+
+                    j14.setVisible(false);
+                    j14.setEnabled(false);
+
+                    j15.setVisible(false);
+                    j15.setEnabled(false);
+
+                    option1Text.setVisible(false);
+                    option1Text.setEnabled(false);
+                    option2Text.setVisible(false);
+                    option2Text.setEnabled(false);
+                    option3Text.setVisible(false);
+                    option3Text.setEnabled(false);
+                    option4Text.setVisible(false);
+                    option4Text.setEnabled(false);
+
+                    sequenceText.setVisible(false);
+                    sequenceText.setEnabled(false);
+
+                    contentText.setVisible(false);
+                    contentText.setEnabled(false);
+
+                    label1.setVisible(false);
+                    label2.setVisible(false);
+                    label3.setVisible(false);
+
+                    enter.setVisible(false);
+                    enter.setEnabled(false);
+
+                    pageState++;
+                } else {
+                    j1.setVisible(true);
+                    j1.setEnabled(true);
+
+                    j2.setVisible(true);
+                    j2.setEnabled(true);
+
+                    j3.setVisible(true);
+                    j3.setEnabled(true);
+
+                    j4.setVisible(true);
+                    j4.setEnabled(true);
+
+                    j5.setVisible(true);
+                    j5.setEnabled(true);
+
+                    j6.setVisible(true);
+                    j6.setEnabled(true);
+
+                    j7.setVisible(true);
+                    j7.setEnabled(true);
+
+                    j8.setVisible(true);
+                    j8.setEnabled(true);
+
+                    j9.setVisible(true);
+                    j9.setEnabled(true);
+
+                    j10.setVisible(true);
+                    j10.setEnabled(true);
+
+                    j11.setVisible(true);
+                    j11.setEnabled(true);
+
+                    j12.setVisible(true);
+                    j12.setEnabled(true);
+
+                    j13.setVisible(true);
+                    j13.setEnabled(true);
+
+                    j14.setVisible(true);
+                    j14.setEnabled(true);
+
+                    j15.setVisible(true);
+                    j15.setEnabled(true);
+
+                    sequenceText.setVisible(true);
+                    sequenceText.setEnabled(true);
+
+                    contentText.setVisible(true);
+                    contentText.setEnabled(true);
+
+                    label1.setVisible(true);
+                    label2.setVisible(true);
+                    label3.setVisible(true);
+
+                    enter.setVisible(true);
+                    enter.setEnabled(true);
+                    
+                    pageState--;
+                }
+
             }
             
         });
 
         sequence = 0;
         content = "";
+        pageState = 0;
     }
 
     public static void main (String arg[]) throws IOException {
@@ -281,7 +420,7 @@ public class menu {
         frame.setSize(1000, 1000);
         frame.setLayout(null);
 
-        JLabel label1 = new JLabel("Curriculum");
+        label1 = new JLabel("Curriculum");
         label1.setSize(100,100);
         label1.setLocation(100, 0);
         frame.add(label1);
@@ -339,7 +478,7 @@ public class menu {
         frame.add(j14);
         frame.add(j15);
 
-        JLabel label2 = new JLabel("Sequence");
+        label2 = new JLabel("Sequence");
         label2.setSize(100,100);
         label2.setLocation(100, 200);
         frame.add(label2);
@@ -355,7 +494,7 @@ public class menu {
         messageText.setLocation(500, 200);
         frame.add(messageText);
 
-        JLabel label3 = new JLabel("Content");
+        label3 = new JLabel("Content");
         label3.setSize(100,100);
         label3.setLocation(100, 400);
         frame.add(label3);
@@ -419,7 +558,7 @@ public class menu {
         frame.getContentPane().setBackground(color1);
 
         while (frame.isActive()) {
-            if (j5.isSelected()) {
+            if (j5.isSelected() && pageState == 0) {
                 contentText.setLocation(250, 500);
 
                 option1Text.setEnabled(true);
@@ -436,9 +575,22 @@ public class menu {
 
                 question.setVisible(true);
 
-            } else {
-                contentText.setEnabled(true);
-                contentText.setVisible(true);
+            } else if (j5.isSelected() && pageState == 1) {
+                option1Text.setEnabled(false);
+                option1Text.setVisible(false);
+
+                option2Text.setEnabled(false);
+                option2Text.setVisible(false);
+
+                option3Text.setEnabled(false);
+                option3Text.setVisible(false);
+
+                option4Text.setEnabled(false);
+                option4Text.setVisible(false);
+
+                question.setVisible(false);
+            }
+            else {
                 contentText.setLocation(250, 400);
 
                 option1Text.setEnabled(false);
