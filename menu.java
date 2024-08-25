@@ -42,6 +42,11 @@ public class menu {
     private static JLabel label2;
     private static JLabel label3;
 
+    private static JTextArea preview;
+    private static JScrollPane scrollPane;
+
+    private static int limit;
+
     public menu() {
         //Setting up input options
         j1 = new JRadioButton("Talking");
@@ -62,9 +67,12 @@ public class menu {
         j14 = new JRadioButton("Eye contact maintaining virtual avatar");
         j15 = new JRadioButton("In-person partner finding instruction paired with activity");
 
-        //Setting up Enter button.
+        //Setting up Enter and Next Page button.
         enter = new JButton("Enter");
         nextPage = new JButton("Next Page");
+
+        preview = new JTextArea("", 100, 100);
+        scrollPane = new JScrollPane(preview);
 
         group.add(j1);
         group.add(j2);
@@ -237,7 +245,6 @@ public class menu {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("New Page");
 
                 if (pageState == 0) {
                     j1.setVisible(false);
@@ -307,6 +314,33 @@ public class menu {
                     enter.setVisible(false);
                     enter.setEnabled(false);
 
+                    scrollPane.setVisible(true);
+                    scrollPane.setEnabled(true);
+
+                    File file = new File("export.txt");
+                    try (Scanner reader = new Scanner(file)) {
+                        ArrayList<String> exportList = new ArrayList<>();
+                        while(reader.hasNextLine()) {
+                            exportList.add(reader.nextLine());
+                        }
+
+                        reader.close();
+
+                        System.out.println(exportList.toString());
+
+                        ArrayList<String> newIndexOrder = new ArrayList<>();
+
+                        int index2 = 0;
+
+                        for (int x = 0; x < exportList.size(); x++) {
+                        }
+
+
+
+                    } catch (FileNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
+
                     pageState++;
                 } else {
                     j1.setVisible(true);
@@ -366,6 +400,9 @@ public class menu {
 
                     enter.setVisible(true);
                     enter.setEnabled(true);
+
+                    scrollPane.setVisible(false);
+                    scrollPane.setEnabled(false);
                     
                     pageState--;
                 }
@@ -377,6 +414,7 @@ public class menu {
         sequence = 0;
         content = "";
         pageState = 0;
+        limit = 50;
     }
 
     public static void main (String arg[]) throws IOException {
@@ -556,6 +594,12 @@ public class menu {
 
         Color color1 = new Color(169, 192, 232);
         frame.getContentPane().setBackground(color1);
+
+        scrollPane.setSize(925, 500);
+        scrollPane.setLocation(25,0);
+        scrollPane.setVisible(false);
+        scrollPane.setEnabled(false);
+        frame.add(scrollPane);
 
         while (frame.isActive()) {
             if (j5.isSelected() && pageState == 0) {
