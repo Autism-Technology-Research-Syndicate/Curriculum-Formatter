@@ -327,8 +327,6 @@ public class menu {
 
                         reader.close();
 
-                        System.out.println(exportList.toString());
-
                         ArrayList<Integer> newIndexOrder = new ArrayList<>();
                         ArrayList<String> newListOrder = new ArrayList<>();
 
@@ -337,8 +335,6 @@ public class menu {
                         }
 
                         Collections.sort(newIndexOrder);
-
-                        System.out.println(newIndexOrder.toString());
 
                         for (int y = 0; y < newIndexOrder.size(); y++) {
                             int num = newIndexOrder.get(y);
@@ -351,8 +347,8 @@ public class menu {
                                 }
 
                             }
-                            System.out.println(newListOrder.toString());
                         }
+                        System.out.println(newListOrder.toString());
 
                         for (int n = 0; n < newListOrder.size(); n++) {
                             readFormat(newListOrder.get(n));
@@ -865,7 +861,12 @@ public class menu {
         }
 
         preview.append("Sequence: " + Integer.toString(seq) + "\n");
-        preview.append("Content: " + format.substring(4) + "\n");
+
+        if (format.substring(4).length() > limit) {
+            preview.append("Content: " + format.substring(4, 4+limit) + "...\n");
+        } else {
+            preview.append("Content: " + format.substring(4) + "\n");
+        }
         preview.append("\n");
     }
 
