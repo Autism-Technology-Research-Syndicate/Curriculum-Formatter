@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import javax.swing.*;
@@ -328,11 +329,33 @@ public class menu {
 
                         System.out.println(exportList.toString());
 
-                        ArrayList<String> newIndexOrder = new ArrayList<>();
-
-                        int index2 = 0;
+                        ArrayList<Integer> newIndexOrder = new ArrayList<>();
+                        ArrayList<String> newListOrder = new ArrayList<>();
 
                         for (int x = 0; x < exportList.size(); x++) {
+                            newIndexOrder.add(Integer.parseInt(exportList.get(x).substring(2, 4)));
+                        }
+
+                        Collections.sort(newIndexOrder);
+
+                        System.out.println(newIndexOrder.toString());
+
+                        for (int y = 0; y < newIndexOrder.size(); y++) {
+                            int num = newIndexOrder.get(y);
+                            for (int z = 0; z < exportList.size(); z++) {
+                                int exSeq = Integer.parseInt(exportList.get(z).substring(2,4));
+
+                                if (exSeq == num) {
+                                    newListOrder.add(exportList.get(z));
+                                    break;
+                                }
+
+                            }
+                            System.out.println(newListOrder.toString());
+                        }
+
+                        for (int n = 0; n < newListOrder.size(); n++) {
+                            readFormat(newListOrder.get(n));
                         }
 
 
@@ -403,6 +426,8 @@ public class menu {
 
                     scrollPane.setVisible(false);
                     scrollPane.setEnabled(false);
+
+                    preview.setText("");
                     
                     pageState--;
                 }
@@ -786,6 +811,62 @@ public class menu {
                 writer3.write(entries.get(x) + '\n');
             }
         writer3.close();
+    }
+
+    public void readFormat(String format) {
+        int curriculum = Integer.parseInt(format.substring(0, 2));
+        int seq = Integer.parseInt(format.substring(2, 4));
+
+        if (curriculum == 11) {
+            preview.append("Curriculum: Talking\n");
+            preview.append("Type: Input\n");
+        } else if (curriculum == 12) {
+            preview.append("Curriculum: Eye Contact\n");
+            preview.append("Type: Input\n");
+        } else if (curriculum == 13) {
+            preview.append("Curriculum: Emotion\n");
+            preview.append("Type: Input\n");
+        } else if (curriculum == 14) {
+            preview.append("Curriculum: Typing\n");
+            preview.append("Type: Input\n");
+        } else if (curriculum == 15) {
+            preview.append("Curriculum: Multiple choice\n");
+            preview.append("Type: Input\n");
+        } else if (curriculum == 16) {
+            preview.append("Curriculum: Slider\n");
+            preview.append("Type: Input\n");
+        } else if (curriculum == 17) {
+            preview.append("Curriculum: Ping for host for validating completed activity\n");
+            preview.append("Type: Input\n");
+        } else if (curriculum == 21) {
+            preview.append("Curriculum: Video Lessons\n");
+            preview.append("Type: Output\n");
+        } else if (curriculum == 22) {
+            preview.append("Curriculum: Reading\n");
+            preview.append("Type: Output\n");
+        } else if (curriculum == 23) {
+            preview.append("Curriculum: Teacher instruction\n");
+            preview.append("Type: Output\n");
+        } else if (curriculum == 24) {
+            preview.append("Curriculum: Pictures/diagrams\n");
+            preview.append("Type: Output\n");
+        } else if (curriculum == 25) {
+            preview.append("Curriculum: Animations of tasks\n");
+            preview.append("Type: Output\n");
+        } else if (curriculum == 26) {
+            preview.append("Curriculum: Conversational AI\n");
+            preview.append("Type: Output\n");
+        } else if (curriculum == 27) {
+            preview.append("Curriculum: Eye contact maintaining virtual avatar\n");
+            preview.append("Type: Output\n");
+        } else if (curriculum == 28) {
+            preview.append("Curriculum: In-person partner finding instruction paired with activity\n");
+            preview.append("Type: Output\n");
+        }
+
+        preview.append("Sequence: " + Integer.toString(seq) + "\n");
+        preview.append("Content: " + format.substring(4) + "\n");
+        preview.append("\n");
     }
 
     
