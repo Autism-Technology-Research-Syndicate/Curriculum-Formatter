@@ -327,6 +327,8 @@ public class menu {
 
                         reader.close();
 
+                        System.out.println(exportList.toString());
+
                         ArrayList<Integer> newIndexOrder = new ArrayList<>();
                         ArrayList<String> newListOrder = new ArrayList<>();
 
