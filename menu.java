@@ -811,6 +811,10 @@ public class menu {
         writer3.close();
     }
 
+    /**
+     * This method takes the given String format and translates it into human terms.
+     * @param format
+     */
     public void readFormat(String format) {
         int curriculum = Integer.parseInt(format.substring(0, 2));
         int seq = Integer.parseInt(format.substring(2, 4));
