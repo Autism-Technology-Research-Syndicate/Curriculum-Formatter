@@ -70,7 +70,7 @@ public class menu {
 
         //Setting up Enter and Next Page button.
         enter = new JButton("Enter");
-        nextPage = new JButton("Next Page");
+        nextPage = new JButton("View Content");
 
         preview = new JTextArea("", 100, 100);
         scrollPane = new JScrollPane(preview);
@@ -248,6 +248,8 @@ public class menu {
             public void actionPerformed(ActionEvent e) {
 
                 if (pageState == 0) {
+                    nextPage.setText("Home");
+
                     j1.setVisible(false);
                     j1.setEnabled(false);
 
@@ -364,6 +366,8 @@ public class menu {
 
                     pageState++;
                 } else {
+                    nextPage.setText("View Content");
+
                     j1.setVisible(true);
                     j1.setEnabled(true);
 
@@ -610,7 +614,7 @@ public class menu {
         enter.setSize(100,100);
 
         nextPage.setLocation(100, 700);
-        nextPage.setSize(100, 100);
+        nextPage.setSize(150, 100);
 
         frame.add(enter);
         frame.add(nextPage);
