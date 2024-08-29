@@ -12,14 +12,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import javax.swing.*;
 
-public class Menu implements ActionListener {
+public class menu {
     private ButtonGroup group = new ButtonGroup();
     private static JRadioButton j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, j14, j15;
     private static JButton enter;
+    private static JButton nextPage;
     private static int sequence;
     private static String content;
     private static JTextField sequenceText;
@@ -35,7 +37,18 @@ public class Menu implements ActionListener {
 
     private static JLabel messageText;
 
-    public Menu() {
+    private static int pageState;
+
+    private static JLabel label1;
+    private static JLabel label2;
+    private static JLabel label3;
+
+    private static JTextArea preview;
+    private static JScrollPane scrollPane;
+
+    private static int limit;
+
+    public menu() {
         //Setting up input options
         j1 = new JRadioButton("Talking");
         j2 = new JRadioButton("Eye Contact");
@@ -55,8 +68,12 @@ public class Menu implements ActionListener {
         j14 = new JRadioButton("Eye contact maintaining virtual avatar");
         j15 = new JRadioButton("In-person partner finding instruction paired with activity");
 
-        //Setting up Enter button.
+        //Setting up Enter and Next Page button.
         enter = new JButton("Enter");
+        nextPage = new JButton("View Content");
+
+        preview = new JTextArea("", 100, 100);
+        scrollPane = new JScrollPane(preview);
 
         group.add(j1);
         group.add(j2);
@@ -74,10 +91,357 @@ public class Menu implements ActionListener {
         group.add(j14);
         group.add(j15);
 
-        enter.addActionListener(this);
+        enter.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int curriculumNum = 0;
+                System.out.println("Sequence: " + sequenceText.getText());
+        
+                if (sequenceText.getText().equals("")) {
+                    sequence = seqNum + 1;
+                    seqNum = seqNum + 1;
+                    try {
+                        saveSeqNum();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+        
+                } else {
+                    if (Integer.parseInt(sequenceText.getText()) > 99) {
+        
+                        messageText.setText("Sequence can't be more than 99");
+            
+                        group.clearSelection();
+                        sequenceText.setText("");
+                        contentText.setText("");
+                        option1Text.setText("");
+                        option2Text.setText("");
+                        option3Text.setText("");
+                        option4Text.setText("");
+                    } else {
+                        sequence = Integer.parseInt(sequenceText.getText());
+                        try {
+                            insertSequence(seqNum, sequence);
+                        } catch (FileNotFoundException e1) {
+                            e1.printStackTrace();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        seqNum = sequence;
+                        try {
+                            saveSeqNum();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                    
+            
+                    
+                    System.out.println("Content: " + contentText.getText());
+                    content = contentText.getText();
+            
+                    if (j1.isSelected() == true) {
+                        System.out.println("Curriculum: " + j1.getText());
+                        curriculumNum = 11;
+                    }
+                    else if (j2.isSelected() == true) {
+                        System.out.println("Curriculum: " + j2.getText());
+                        curriculumNum = 12;
+                    }
+                    else if (j3.isSelected() == true) {
+                        System.out.println("Curriculum: " + j3.getText());
+                        curriculumNum = 13;
+                    }
+                    else if (j4.isSelected() == true) {
+                        System.out.println("Curriculum: " + j4.getText());
+                        curriculumNum = 14;
+                    }
+                    else if (j5.isSelected() == true) {
+                        System.out.println("Curriculum: " + j5.getText());
+                        curriculumNum = 15;
+                    }
+                    else if (j6.isSelected() == true) {
+                        System.out.println("Curriculum: " + j6.getText());
+                        curriculumNum = 16;
+                    }
+                    else if (j7.isSelected() == true) {
+                        System.out.println("Curriculum: " + j7.getText());
+                        curriculumNum = 17;
+                    }
+                    else if (j8.isSelected() == true) {
+                        System.out.println("Curriculum: " + j8.getText());
+                        curriculumNum = 21;
+                    }
+                    else if (j9.isSelected() == true) {
+                        System.out.println("Curriculum: " + j9.getText());
+                        curriculumNum = 22;
+                    }
+                    else if (j10.isSelected() == true) {
+                        System.out.println("Curriculum: " + j10.getText());
+                        curriculumNum = 23;
+                    }
+                    else if (j11.isSelected() == true) {
+                        System.out.println("Curriculum: " + j11.getText());
+                        curriculumNum = 24;
+                    }
+                    else if (j12.isSelected() == true) {
+                        System.out.println("Curriculum: " + j12.getText());
+                        curriculumNum = 25;
+                    }
+                    else if (j13.isSelected() == true) {
+                        System.out.println("Curriculum: " + j13.getText());
+                        curriculumNum = 26;
+                    }
+                    else if (j14.isSelected() == true) {
+                        System.out.println("Curriculum: " + j14.getText());
+                        curriculumNum = 27;
+                    }
+                    else if (j15.isSelected() == true) {
+                        System.out.println("Curriculum: " + j15.getText());
+                        curriculumNum = 27;
+                    }
+                    else {
+                        System.out.println("No Curriculum chosen.");
+                    }
+            
+                    String format = "";
+                    format = curriculumNum + "";
+            
+                    if (sequence < 10) {
+                        format = format + "0" + sequence;
+                    } else {
+                        format = format + sequence;
+                    }
+            
+                    if (j5.isSelected()) {
+                        options = "a)" + option1Text.getText() + "b)" + option2Text.getText() + 
+                        "c)" + option3Text.getText() + "d)" + option4Text.getText();
+                        format = format + options;
+                        format = format + content;
+                    } else {
+                        format = format + content;
+                    }
+                    
+                    System.out.println(format);
+            
+                    try {
+                        saveFormatToExportFile(format);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+            
+                    group.clearSelection();
+                    sequenceText.setText("");
+                    contentText.setText("");
+                    option1Text.setText("");
+                    option2Text.setText("");
+                    option3Text.setText("");
+                    option4Text.setText("");
+                }
+            }
+            
+        });
+        nextPage.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                if (pageState == 0) {
+                    nextPage.setText("Home");
+
+                    j1.setVisible(false);
+                    j1.setEnabled(false);
+
+                    j2.setVisible(false);
+                    j2.setEnabled(false);
+
+                    j3.setVisible(false);
+                    j3.setEnabled(false);
+
+                    j4.setVisible(false);
+                    j4.setEnabled(false);
+
+                    j5.setVisible(false);
+                    j5.setEnabled(false);
+
+                    j6.setVisible(false);
+                    j6.setEnabled(false);
+
+                    j7.setVisible(false);
+                    j7.setEnabled(false);
+
+                    j8.setVisible(false);
+                    j8.setEnabled(false);
+
+                    j9.setVisible(false);
+                    j9.setEnabled(false);
+
+                    j10.setVisible(false);
+                    j10.setEnabled(false);
+
+                    j11.setVisible(false);
+                    j11.setEnabled(false);
+
+                    j12.setVisible(false);
+                    j12.setEnabled(false);
+
+                    j13.setVisible(false);
+                    j13.setEnabled(false);
+
+                    j14.setVisible(false);
+                    j14.setEnabled(false);
+
+                    j15.setVisible(false);
+                    j15.setEnabled(false);
+
+                    option1Text.setVisible(false);
+                    option1Text.setEnabled(false);
+                    option2Text.setVisible(false);
+                    option2Text.setEnabled(false);
+                    option3Text.setVisible(false);
+                    option3Text.setEnabled(false);
+                    option4Text.setVisible(false);
+                    option4Text.setEnabled(false);
+
+                    sequenceText.setVisible(false);
+                    sequenceText.setEnabled(false);
+
+                    contentText.setVisible(false);
+                    contentText.setEnabled(false);
+
+                    label1.setVisible(false);
+                    label2.setVisible(false);
+                    label3.setVisible(false);
+
+                    enter.setVisible(false);
+                    enter.setEnabled(false);
+
+                    scrollPane.setVisible(true);
+                    scrollPane.setEnabled(true);
+
+                    File file = new File("export.txt");
+                    try (Scanner reader = new Scanner(file)) {
+                        ArrayList<String> exportList = new ArrayList<>();
+                        while(reader.hasNextLine()) {
+                            exportList.add(reader.nextLine());
+                        }
+
+                        reader.close();
+
+                        System.out.println(exportList.toString());
+
+                        ArrayList<Integer> newIndexOrder = new ArrayList<>();
+                        ArrayList<String> newListOrder = new ArrayList<>();
+
+                        for (int x = 0; x < exportList.size(); x++) {
+                            newIndexOrder.add(Integer.parseInt(exportList.get(x).substring(2, 4)));
+                        }
+
+                        Collections.sort(newIndexOrder);
+
+                        for (int y = 0; y < newIndexOrder.size(); y++) {
+                            int num = newIndexOrder.get(y);
+                            for (int z = 0; z < exportList.size(); z++) {
+                                int exSeq = Integer.parseInt(exportList.get(z).substring(2,4));
+
+                                if (exSeq == num) {
+                                    newListOrder.add(exportList.get(z));
+                                    break;
+                                }
+
+                            }
+                        }
+                        System.out.println(newListOrder.toString());
+
+                        for (int n = 0; n < newListOrder.size(); n++) {
+                            readFormat(newListOrder.get(n));
+                        }
+
+
+
+                    } catch (FileNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
+
+                    pageState++;
+                } else {
+                    nextPage.setText("View Content");
+
+                    j1.setVisible(true);
+                    j1.setEnabled(true);
+
+                    j2.setVisible(true);
+                    j2.setEnabled(true);
+
+                    j3.setVisible(true);
+                    j3.setEnabled(true);
+
+                    j4.setVisible(true);
+                    j4.setEnabled(true);
+
+                    j5.setVisible(true);
+                    j5.setEnabled(true);
+
+                    j6.setVisible(true);
+                    j6.setEnabled(true);
+
+                    j7.setVisible(true);
+                    j7.setEnabled(true);
+
+                    j8.setVisible(true);
+                    j8.setEnabled(true);
+
+                    j9.setVisible(true);
+                    j9.setEnabled(true);
+
+                    j10.setVisible(true);
+                    j10.setEnabled(true);
+
+                    j11.setVisible(true);
+                    j11.setEnabled(true);
+
+                    j12.setVisible(true);
+                    j12.setEnabled(true);
+
+                    j13.setVisible(true);
+                    j13.setEnabled(true);
+
+                    j14.setVisible(true);
+                    j14.setEnabled(true);
+
+                    j15.setVisible(true);
+                    j15.setEnabled(true);
+
+                    sequenceText.setVisible(true);
+                    sequenceText.setEnabled(true);
+
+                    contentText.setVisible(true);
+                    contentText.setEnabled(true);
+
+                    label1.setVisible(true);
+                    label2.setVisible(true);
+                    label3.setVisible(true);
+
+                    enter.setVisible(true);
+                    enter.setEnabled(true);
+
+                    scrollPane.setVisible(false);
+                    scrollPane.setEnabled(false);
+
+                    preview.setText("");
+                    
+                    pageState--;
+                }
+
+            }
+            
+        });
 
         sequence = 0;
         content = "";
+        pageState = 0;
+        limit = 50;
     }
 
     public static void main (String arg[]) throws IOException {
@@ -99,7 +463,7 @@ public class Menu implements ActionListener {
      * @throws IOException
      */
     public static void setUpGUI() throws IOException {
-        Menu menu = new Menu();
+        menu menu = new menu();
 
 
         JFrame frame = new JFrame("SEAL App GUI");
@@ -121,7 +485,7 @@ public class Menu implements ActionListener {
         frame.setSize(1000, 1000);
         frame.setLayout(null);
 
-        JLabel label1 = new JLabel("Curriculum");
+        label1 = new JLabel("Curriculum");
         label1.setSize(100,100);
         label1.setLocation(100, 0);
         frame.add(label1);
@@ -179,7 +543,7 @@ public class Menu implements ActionListener {
         frame.add(j14);
         frame.add(j15);
 
-        JLabel label2 = new JLabel("Sequence");
+        label2 = new JLabel("Sequence");
         label2.setSize(100,100);
         label2.setLocation(100, 200);
         frame.add(label2);
@@ -195,7 +559,7 @@ public class Menu implements ActionListener {
         messageText.setLocation(500, 200);
         frame.add(messageText);
 
-        JLabel label3 = new JLabel("Content");
+        label3 = new JLabel("Content");
         label3.setSize(100,100);
         label3.setLocation(100, 400);
         frame.add(label3);
@@ -249,13 +613,23 @@ public class Menu implements ActionListener {
         enter.setLocation(800, 700);
         enter.setSize(100,100);
 
+        nextPage.setLocation(100, 700);
+        nextPage.setSize(150, 100);
+
         frame.add(enter);
+        frame.add(nextPage);
 
         Color color1 = new Color(169, 192, 232);
         frame.getContentPane().setBackground(color1);
 
+        scrollPane.setSize(925, 500);
+        scrollPane.setLocation(25,0);
+        scrollPane.setVisible(false);
+        scrollPane.setEnabled(false);
+        frame.add(scrollPane);
+
         while (frame.isActive()) {
-            if (j5.isSelected()) {
+            if (j5.isSelected() && pageState == 0) {
                 contentText.setLocation(250, 500);
 
                 option1Text.setEnabled(true);
@@ -272,9 +646,22 @@ public class Menu implements ActionListener {
 
                 question.setVisible(true);
 
-            } else {
-                contentText.setEnabled(true);
-                contentText.setVisible(true);
+            } else if (j5.isSelected() && pageState == 1) {
+                option1Text.setEnabled(false);
+                option1Text.setVisible(false);
+
+                option2Text.setEnabled(false);
+                option2Text.setVisible(false);
+
+                option3Text.setEnabled(false);
+                option3Text.setVisible(false);
+
+                option4Text.setEnabled(false);
+                option4Text.setVisible(false);
+
+                question.setVisible(false);
+            }
+            else {
                 contentText.setLocation(250, 400);
 
                 option1Text.setEnabled(false);
@@ -296,153 +683,6 @@ public class Menu implements ActionListener {
         deleteDuplicates();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        int curriculumNum = 0;
-        System.out.println("Sequence: " + sequenceText.getText());
-
-        if (Integer.parseInt(sequenceText.getText()) > 99) {
-
-            messageText.setText("Sequence can't be more than 99");
-
-            group.clearSelection();
-            sequenceText.setText("");
-            contentText.setText("");
-            option1Text.setText("");
-            option2Text.setText("");
-            option3Text.setText("");
-            option4Text.setText("");
-        } else {
-            if (sequenceText.getText().equals("")) {
-                sequence = seqNum + 1;
-                seqNum = seqNum + 1;
-                try {
-                    saveSeqNum();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-    
-            } else {
-                sequence = Integer.parseInt(sequenceText.getText());
-                try {
-                    insertSequence(seqNum, sequence);
-                } catch (FileNotFoundException e1) {
-                    e1.printStackTrace();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-                seqNum = sequence;
-                try {
-                    saveSeqNum();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
-    
-            
-            System.out.println("Content: " + contentText.getText());
-            content = contentText.getText();
-    
-            if (j1.isSelected() == true) {
-                System.out.println("Curriculum: " + j1.getText());
-                curriculumNum = 11;
-            }
-            else if (j2.isSelected() == true) {
-                System.out.println("Curriculum: " + j2.getText());
-                curriculumNum = 12;
-            }
-            else if (j3.isSelected() == true) {
-                System.out.println("Curriculum: " + j3.getText());
-                curriculumNum = 13;
-            }
-            else if (j4.isSelected() == true) {
-                System.out.println("Curriculum: " + j4.getText());
-                curriculumNum = 14;
-            }
-            else if (j5.isSelected() == true) {
-                System.out.println("Curriculum: " + j5.getText());
-                curriculumNum = 15;
-            }
-            else if (j6.isSelected() == true) {
-                System.out.println("Curriculum: " + j6.getText());
-                curriculumNum = 16;
-            }
-            else if (j7.isSelected() == true) {
-                System.out.println("Curriculum: " + j7.getText());
-                curriculumNum = 17;
-            }
-            else if (j8.isSelected() == true) {
-                System.out.println("Curriculum: " + j8.getText());
-                curriculumNum = 21;
-            }
-            else if (j9.isSelected() == true) {
-                System.out.println("Curriculum: " + j9.getText());
-                curriculumNum = 22;
-            }
-            else if (j10.isSelected() == true) {
-                System.out.println("Curriculum: " + j10.getText());
-                curriculumNum = 23;
-            }
-            else if (j11.isSelected() == true) {
-                System.out.println("Curriculum: " + j11.getText());
-                curriculumNum = 24;
-            }
-            else if (j12.isSelected() == true) {
-                System.out.println("Curriculum: " + j12.getText());
-                curriculumNum = 25;
-            }
-            else if (j13.isSelected() == true) {
-                System.out.println("Curriculum: " + j13.getText());
-                curriculumNum = 26;
-            }
-            else if (j14.isSelected() == true) {
-                System.out.println("Curriculum: " + j14.getText());
-                curriculumNum = 27;
-            }
-            else if (j15.isSelected() == true) {
-                System.out.println("Curriculum: " + j15.getText());
-                curriculumNum = 27;
-            }
-            else {
-                System.out.println("No Curriculum chosen.");
-            }
-    
-            String format = "";
-            format = curriculumNum + "";
-    
-            if (sequence < 10) {
-                format = format + "0" + sequence;
-            } else {
-                format = format + sequence;
-            }
-    
-            if (j5.isSelected()) {
-                options = "a)" + option1Text.getText() + "b)" + option2Text.getText() + 
-                "c)" + option3Text.getText() + "d)" + option4Text.getText();
-                format = format + options;
-                format = format + content;
-            } else {
-                format = format + content;
-            }
-            
-            System.out.println(format);
-    
-            try {
-                saveFormatToExportFile(format);
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-    
-            group.clearSelection();
-            sequenceText.setText("");
-            contentText.setText("");
-            option1Text.setText("");
-            option2Text.setText("");
-            option3Text.setText("");
-            option4Text.setText("");
-        }
-        
-    }
 
     /**
      * This method saves the given format into the export.txt at the bottom of the file.
@@ -573,6 +813,71 @@ public class Menu implements ActionListener {
                 writer3.write(entries.get(x) + '\n');
             }
         writer3.close();
+    }
+
+    /**
+     * This method takes the given String format and translates it into human terms.
+     * @param format
+     */
+    public void readFormat(String format) {
+        int curriculum = Integer.parseInt(format.substring(0, 2));
+        int seq = Integer.parseInt(format.substring(2, 4));
+
+        if (curriculum == 11) {
+            preview.append("Curriculum: Talking\n");
+            preview.append("Type: Input\n");
+        } else if (curriculum == 12) {
+            preview.append("Curriculum: Eye Contact\n");
+            preview.append("Type: Input\n");
+        } else if (curriculum == 13) {
+            preview.append("Curriculum: Emotion\n");
+            preview.append("Type: Input\n");
+        } else if (curriculum == 14) {
+            preview.append("Curriculum: Typing\n");
+            preview.append("Type: Input\n");
+        } else if (curriculum == 15) {
+            preview.append("Curriculum: Multiple choice\n");
+            preview.append("Type: Input\n");
+        } else if (curriculum == 16) {
+            preview.append("Curriculum: Slider\n");
+            preview.append("Type: Input\n");
+        } else if (curriculum == 17) {
+            preview.append("Curriculum: Ping for host for validating completed activity\n");
+            preview.append("Type: Input\n");
+        } else if (curriculum == 21) {
+            preview.append("Curriculum: Video Lessons\n");
+            preview.append("Type: Output\n");
+        } else if (curriculum == 22) {
+            preview.append("Curriculum: Reading\n");
+            preview.append("Type: Output\n");
+        } else if (curriculum == 23) {
+            preview.append("Curriculum: Teacher instruction\n");
+            preview.append("Type: Output\n");
+        } else if (curriculum == 24) {
+            preview.append("Curriculum: Pictures/diagrams\n");
+            preview.append("Type: Output\n");
+        } else if (curriculum == 25) {
+            preview.append("Curriculum: Animations of tasks\n");
+            preview.append("Type: Output\n");
+        } else if (curriculum == 26) {
+            preview.append("Curriculum: Conversational AI\n");
+            preview.append("Type: Output\n");
+        } else if (curriculum == 27) {
+            preview.append("Curriculum: Eye contact maintaining virtual avatar\n");
+            preview.append("Type: Output\n");
+        } else if (curriculum == 28) {
+            preview.append("Curriculum: In-person partner finding instruction paired with activity\n");
+            preview.append("Type: Output\n");
+        }
+
+        preview.append("Sequence: " + Integer.toString(seq) + "\n");
+
+        if (format.substring(4).length() > limit) {
+            preview.append("Content: " + format.substring(4, 4+limit) + "...\n");
+        } else {
+            preview.append("Content: " + format.substring(4) + "\n");
+        }
+        preview.append("\n");
     }
 
     
