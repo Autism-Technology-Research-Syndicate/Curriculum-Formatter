@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -609,6 +610,12 @@ public class menu {
         question.setVisible(false);
         frame.add(question);
 
+        ImageIcon image = new ImageIcon("a7366912e4f34cb285e0c659c64be370.png");
+        JLabel logo = new JLabel();
+        logo.setIcon(new ImageIcon(image.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
+        logo.setLocation(450, 650);
+        logo.setSize(200, 200);
+        frame.add(logo);
 
         enter.setLocation(800, 700);
         enter.setSize(100,100);
