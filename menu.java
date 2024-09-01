@@ -45,6 +45,8 @@ public class menu {
     private static JLabel label2;
     private static JLabel label3;
 
+    private static JLabel logo;
+
     private static JTextArea preview;
     private static JScrollPane scrollPane;
 
@@ -319,6 +321,8 @@ public class menu {
                     enter.setVisible(false);
                     enter.setEnabled(false);
 
+                    logo.setVisible(false);
+
                     scrollPane.setVisible(true);
                     scrollPane.setEnabled(true);
 
@@ -428,6 +432,8 @@ public class menu {
                     enter.setVisible(true);
                     enter.setEnabled(true);
 
+                    logo.setVisible(true);
+
                     scrollPane.setVisible(false);
                     scrollPane.setEnabled(false);
 
@@ -454,7 +460,6 @@ public class menu {
         //System.out.println(data);
         seqNum = data;
         reader.close();
-        
         setUpGUI();
 
     }
@@ -488,7 +493,7 @@ public class menu {
         frame.setLayout(null);
 
         label1 = new JLabel("Curriculum");
-        label1.setSize(100,100);
+        label1.setSize(110,100);
         label1.setLocation(100, 0);
         label1.setFont(new Font("Helvetica Neue", Font.BOLD,20));;
         frame.add(label1);
@@ -639,10 +644,11 @@ public class menu {
         frame.add(question);
 
         ImageIcon image = new ImageIcon("a7366912e4f34cb285e0c659c64be370.png");
-        JLabel logo = new JLabel();
-        logo.setIcon(new ImageIcon(image.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH)));
-        logo.setLocation(450, 650);
-        logo.setSize(200, 200);
+        logo = new JLabel();
+        logo.setIcon(new ImageIcon(image.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+        logo.setLocation(0, 0);
+        logo.setSize(50, 50);
+        logo.setVisible(true);
         frame.add(logo);
 
         Color color3 = new Color(76, 111, 159);
