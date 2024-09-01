@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -489,6 +490,7 @@ public class menu {
         label1 = new JLabel("Curriculum");
         label1.setSize(100,100);
         label1.setLocation(100, 0);
+        label1.setFont(new Font("Helvetica Neue", Font.BOLD,20));;
         frame.add(label1);
 
         j1.setBounds(250, 0, 120, 50);
@@ -527,6 +529,22 @@ public class menu {
         j14.setBackground(color2);
         j15.setBackground(color2);
 
+        j1.setFont(new Font("Helvetica Neue", Font.BOLD,15));
+        j2.setFont(new Font("Helvetica Neue", Font.BOLD,15));
+        j3.setFont(new Font("Helvetica Neue", Font.BOLD,15));
+        j4.setFont(new Font("Helvetica Neue", Font.BOLD,15));
+        j5.setFont(new Font("Helvetica Neue", Font.BOLD,15));
+        j6.setFont(new Font("Helvetica Neue", Font.BOLD,15));
+        j7.setFont(new Font("Helvetica Neue", Font.BOLD,15));
+        j8.setFont(new Font("Helvetica Neue", Font.BOLD,15));
+        j9.setFont(new Font("Helvetica Neue", Font.BOLD,15));
+        j10.setFont(new Font("Helvetica Neue", Font.BOLD,15));
+        j11.setFont(new Font("Helvetica Neue", Font.BOLD,15));
+        j12.setFont(new Font("Helvetica Neue", Font.BOLD,15));
+        j13.setFont(new Font("Helvetica Neue", Font.BOLD,15));
+        j14.setFont(new Font("Helvetica Neue", Font.BOLD,15));
+        j15.setFont(new Font("Helvetica Neue", Font.BOLD,15));
+
 
         frame.add(j1);
         frame.add(j2);
@@ -547,28 +565,33 @@ public class menu {
         label2 = new JLabel("Sequence");
         label2.setSize(100,100);
         label2.setLocation(100, 200);
+        label2.setFont(new Font("Helvetica Neue", Font.BOLD,20));
         frame.add(label2);
 
         sequenceText = new JTextField();
         sequenceText.setText("");
         sequenceText.setSize(200,100);
         sequenceText.setLocation(250, 200);
+        sequenceText.setFont(new Font("Helvetica Neue", Font.BOLD,20));
         frame.add(sequenceText);
 
         messageText = new JLabel("");
         messageText.setSize(400,100);
         messageText.setLocation(500, 200);
+        messageText.setFont(new Font("Helvetica Neue", Font.BOLD,20));
         frame.add(messageText);
 
         label3 = new JLabel("Content");
         label3.setSize(100,100);
         label3.setLocation(100, 400);
+        label3.setFont(new Font("Helvetica Neue", Font.BOLD,20));
         frame.add(label3);
 
         contentText = new JTextField();
         contentText.setText("");
         contentText.setSize(700,100);
         contentText.setLocation(250, 400);
+        contentText.setFont(new Font("Helvetica Neue", Font.BOLD,20));
         frame.add(contentText);
 
         option1Text = new JTextField();
@@ -578,6 +601,7 @@ public class menu {
         option1Text.setBackground(new Color(56, 163, 165));
         option1Text.setEnabled(false);
         option1Text.setVisible(false);
+        option1Text.setFont(new Font("Helvetica Neue", Font.BOLD,15));
         frame.add(option1Text);
 
         option2Text = new JTextField();
@@ -586,6 +610,7 @@ public class menu {
         option2Text.setLocation(400, 400);
         option2Text.setEnabled(false);
         option2Text.setVisible(false);
+        option2Text.setFont(new Font("Helvetica Neue", Font.BOLD,15));
         frame.add(option2Text);
 
         option3Text = new JTextField();
@@ -594,6 +619,7 @@ public class menu {
         option3Text.setLocation(550, 400);
         option3Text.setEnabled(false);
         option3Text.setVisible(false);
+        option3Text.setFont(new Font("Helvetica Neue", Font.BOLD,15));
         frame.add(option3Text);
 
         option4Text = new JTextField();
@@ -602,12 +628,14 @@ public class menu {
         option4Text.setLocation(700, 400);
         option4Text.setEnabled(false);
         option4Text.setVisible(false);
+        option4Text.setFont(new Font("Helvetica Neue", Font.BOLD,15));
         frame.add(option4Text);
 
         JLabel question = new JLabel("Question");
         question.setSize(100,100);
         question.setLocation(100, 500);
         question.setVisible(false);
+        question.setFont(new Font("Helvetica Neue", Font.BOLD,20));
         frame.add(question);
 
         ImageIcon image = new ImageIcon("a7366912e4f34cb285e0c659c64be370.png");
@@ -617,11 +645,16 @@ public class menu {
         logo.setSize(200, 200);
         frame.add(logo);
 
+        Color color3 = new Color(76, 111, 159);
         enter.setLocation(800, 700);
         enter.setSize(100,100);
+        enter.setBackground(color3);
+        enter.setFont(new Font("Helvetica Neue", Font.BOLD,25));
 
         nextPage.setLocation(100, 700);
         nextPage.setSize(150, 100);
+        nextPage.setBackground(color3);
+        nextPage.setFont(new Font("Helvetica Neue", Font.BOLD,15));
 
         frame.add(enter);
         frame.add(nextPage);
@@ -737,6 +770,13 @@ public class menu {
             reader.close();
 
             System.out.println(list.size());
+
+            for (int n = 0; n < list.size(); n++) {
+                if (list.get(n).equals("000")) {
+                    list.remove(n);
+                    n--;
+                }
+            }
 
             for (int x = 0; x < list.size(); x++) {
                 int count = 0;
