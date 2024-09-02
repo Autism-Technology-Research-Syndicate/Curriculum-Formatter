@@ -494,27 +494,29 @@ public class menu {
 
         label1 = new JLabel("Curriculum");
         label1.setSize(110,100);
-        label1.setLocation(100, 0);
+        label1.setLocation(100, 50);
         label1.setFont(new Font("Helvetica Neue", Font.BOLD,20));;
         frame.add(label1);
 
-        j1.setBounds(250, 0, 120, 50);
-        j2.setBounds(400, 0, 120, 50);
-        j3.setBounds(550, 0, 120, 50);
-        j4.setBounds(675, 0, 120, 50);
-        j5.setBounds(825, 0, 120, 50);
+        j1.setBounds(0, 150, 120, 50);
+        j2.setBounds(125, 150, 120, 50);
+        j3.setBounds(250, 150, 120, 50);
 
-        j6.setBounds(250, 50, 120, 50);
-        j7.setBounds(400, 50, 120, 50);
-        j8.setBounds(550, 50, 120, 50);
-        j9.setBounds(675, 50, 120, 50);
-        j10.setBounds(825, 50, 120, 50);
+        j4.setBounds(0, 200, 120, 50);
+        j5.setBounds(125, 200, 120, 50);
+        j6.setBounds(250, 200, 120, 50);
 
-        j11.setBounds(250, 100, 120, 50);
-        j12.setBounds(400, 100, 120, 50);
-        j13.setBounds(550, 100, 120, 50);
-        j14.setBounds(675, 100, 120, 50);
-        j15.setBounds(825, 100, 120, 50);
+        j7.setBounds(0, 250, 120, 50);
+        j8.setBounds(125, 250, 120, 50);
+        j9.setBounds(250, 250, 120, 50);
+
+        j10.setBounds(0, 300, 120, 50);
+        j11.setBounds(125, 300, 120, 50);
+        j12.setBounds(250, 300, 120, 50);
+
+        j13.setBounds(0, 350, 120, 50);
+        j14.setBounds(125, 350, 120, 50);
+        j15.setBounds(250, 350, 120, 50);
 
         Color color2 = new Color(216, 215, 249);
         
@@ -569,14 +571,14 @@ public class menu {
 
         label2 = new JLabel("Sequence");
         label2.setSize(100,100);
-        label2.setLocation(100, 200);
+        label2.setLocation(400, 500);
         label2.setFont(new Font("Helvetica Neue", Font.BOLD,20));
         frame.add(label2);
 
         sequenceText = new JTextField();
         sequenceText.setText("");
-        sequenceText.setSize(200,100);
-        sequenceText.setLocation(250, 200);
+        sequenceText.setSize(100,50);
+        sequenceText.setLocation(500, 525);
         sequenceText.setFont(new Font("Helvetica Neue", Font.BOLD,20));
         frame.add(sequenceText);
 
@@ -588,21 +590,21 @@ public class menu {
 
         label3 = new JLabel("Content");
         label3.setSize(100,100);
-        label3.setLocation(100, 400);
+        label3.setLocation(400, 0);
         label3.setFont(new Font("Helvetica Neue", Font.BOLD,20));
         frame.add(label3);
 
         contentText = new JTextField();
         contentText.setText("");
-        contentText.setSize(700,100);
-        contentText.setLocation(250, 400);
+        contentText.setSize(550,100);
+        contentText.setLocation(400, 100);
         contentText.setFont(new Font("Helvetica Neue", Font.BOLD,20));
         frame.add(contentText);
 
         option1Text = new JTextField();
         option1Text.setText("");
         option1Text.setSize(150,50);
-        option1Text.setLocation(250, 400);
+        option1Text.setLocation(400, 300);
         option1Text.setBackground(new Color(56, 163, 165));
         option1Text.setEnabled(false);
         option1Text.setVisible(false);
@@ -612,7 +614,7 @@ public class menu {
         option2Text = new JTextField();
         option2Text.setText("");
         option2Text.setSize(150,50);
-        option2Text.setLocation(400, 400);
+        option2Text.setLocation(550, 300);
         option2Text.setEnabled(false);
         option2Text.setVisible(false);
         option2Text.setFont(new Font("Helvetica Neue", Font.BOLD,15));
@@ -621,7 +623,7 @@ public class menu {
         option3Text = new JTextField();
         option3Text.setText("");
         option3Text.setSize(150,50);
-        option3Text.setLocation(550, 400);
+        option3Text.setLocation(700, 300);
         option3Text.setEnabled(false);
         option3Text.setVisible(false);
         option3Text.setFont(new Font("Helvetica Neue", Font.BOLD,15));
@@ -630,15 +632,15 @@ public class menu {
         option4Text = new JTextField();
         option4Text.setText("");
         option4Text.setSize(150,50);
-        option4Text.setLocation(700, 400);
+        option4Text.setLocation(850, 300);
         option4Text.setEnabled(false);
         option4Text.setVisible(false);
         option4Text.setFont(new Font("Helvetica Neue", Font.BOLD,15));
         frame.add(option4Text);
 
-        JLabel question = new JLabel("Question");
+        JLabel question = new JLabel("Choices");
         question.setSize(100,100);
-        question.setLocation(100, 500);
+        question.setLocation(400, 200);
         question.setVisible(false);
         question.setFont(new Font("Helvetica Neue", Font.BOLD,20));
         frame.add(question);
@@ -676,7 +678,7 @@ public class menu {
 
         while (frame.isActive()) {
             if (j5.isSelected() && pageState == 0) {
-                contentText.setLocation(250, 500);
+                contentText.setLocation(400, 100);
 
                 option1Text.setEnabled(true);
                 option1Text.setVisible(true);
@@ -691,6 +693,7 @@ public class menu {
                 option4Text.setVisible(true);
 
                 question.setVisible(true);
+                label3.setText("Question");
 
             } else if (j5.isSelected() && pageState == 1) {
                 option1Text.setEnabled(false);
@@ -708,7 +711,8 @@ public class menu {
                 question.setVisible(false);
             }
             else {
-                contentText.setLocation(250, 400);
+                label3.setText("Content");
+                contentText.setLocation(400, 100);
 
                 option1Text.setEnabled(false);
                 option1Text.setVisible(false);
@@ -933,5 +937,4 @@ public class menu {
         preview.append("\n");
     }
 
-    
 }
