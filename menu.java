@@ -584,7 +584,7 @@ public class menu {
 
         messageText = new JLabel("");
         messageText.setSize(400,100);
-        messageText.setLocation(500, 200);
+        messageText.setLocation(650, 0);
         messageText.setFont(new Font("Helvetica Neue", Font.BOLD,20));
         frame.add(messageText);
 
@@ -654,15 +654,19 @@ public class menu {
         frame.add(logo);
 
         Color color3 = new Color(76, 111, 159);
-        enter.setLocation(800, 700);
-        enter.setSize(100,100);
+        //enter.setLocation(800, 700);
+        //enter.setSize(100,100);
         enter.setBackground(color3);
         enter.setFont(new Font("Helvetica Neue", Font.BOLD,25));
+        enter.setBounds(800, 700, 100, 100);
+        enter.setBorder(new RoundButton(15));
 
-        nextPage.setLocation(100, 700);
-        nextPage.setSize(150, 100);
+        //nextPage.setLocation(100, 700);
+        //nextPage.setSize(150, 100);
         nextPage.setBackground(color3);
         nextPage.setFont(new Font("Helvetica Neue", Font.BOLD,15));
+        nextPage.setBounds(100, 700, 150, 100);
+        nextPage.setBorder(new RoundButton(15));
 
         frame.add(enter);
         frame.add(nextPage);
