@@ -52,6 +52,8 @@ public class menu {
 
     private static int limit;
 
+    private static JLabel background;
+
     public menu() {
         //Setting up input options
         j1 = new JRadioButton("Talking");
@@ -325,6 +327,7 @@ public class menu {
 
                     scrollPane.setVisible(true);
                     scrollPane.setEnabled(true);
+                    scrollPane.getParent().setComponentZOrder(scrollPane, 0);
 
                     File file = new File("export.txt");
                     try (Scanner reader = new Scanner(file)) {
@@ -667,9 +670,10 @@ public class menu {
         frame.add(enter);
         frame.add(nextPage);
 
-        JLabel background = new JLabel(new ImageIcon("gradient.png"));
+        background = new JLabel(new ImageIcon("gradient.png"));
         background.setLocation(0, 0);
         background.setSize(1000, 1000);
+        background.setVisible(true);
         frame.add(background);
 
         Color color1 = new Color(0, 0, 0,0);
