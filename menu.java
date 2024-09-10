@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class menu {
@@ -47,7 +46,6 @@ public class menu {
     private static JLabel label3;
 
     private static JLabel logo;
-    private static JLabel gradient;
 
     private static JTextArea preview;
     private static JScrollPane scrollPane;
