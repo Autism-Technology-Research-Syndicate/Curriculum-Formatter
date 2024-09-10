@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class menu {
@@ -46,6 +47,7 @@ public class menu {
     private static JLabel label3;
 
     private static JLabel logo;
+    private static JLabel gradient;
 
     private static JTextArea preview;
     private static JScrollPane scrollPane;
@@ -654,15 +656,11 @@ public class menu {
         frame.add(logo);
 
         Color color3 = new Color(76, 111, 159);
-        //enter.setLocation(800, 700);
-        //enter.setSize(100,100);
         enter.setBackground(color3);
         enter.setFont(new Font("Helvetica Neue", Font.BOLD,25));
         enter.setBounds(800, 700, 100, 100);
         enter.setBorder(new RoundButton(15));
 
-        //nextPage.setLocation(100, 700);
-        //nextPage.setSize(150, 100);
         nextPage.setBackground(color3);
         nextPage.setFont(new Font("Helvetica Neue", Font.BOLD,15));
         nextPage.setBounds(100, 700, 150, 100);
@@ -671,7 +669,12 @@ public class menu {
         frame.add(enter);
         frame.add(nextPage);
 
-        Color color1 = new Color(169, 192, 232);
+        JLabel background = new JLabel(new ImageIcon("gradient.png"));
+        background.setLocation(0, 0);
+        background.setSize(1000, 1000);
+        frame.add(background);
+
+        Color color1 = new Color(0, 0, 0,0);
         frame.getContentPane().setBackground(color1);
 
         scrollPane.setSize(925, 500);
