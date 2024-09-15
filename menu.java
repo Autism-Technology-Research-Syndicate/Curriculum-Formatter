@@ -620,6 +620,10 @@ public class menu {
                 save.setVisible(true);
                 save.setEnabled(true);
 
+                messageText.setSize(400,100);
+                messageText.setLocation(650, 0);
+                messageText.setVisible(false);
+
                 scrollPane.setVisible(true);
                 scrollPane.setEnabled(true);
                 scrollPane.getParent().setComponentZOrder(scrollPane, 0);
@@ -708,8 +712,14 @@ public class menu {
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
+                    messageText.setSize(400,100);
+                    messageText.setLocation(650, 0);
+                    messageText.setVisible(false);
                 } else {
-                    System.out.println("No key should have the same value or letter");
+                    messageText.setText("No key should have the same value or letter");
+                    messageText.setSize(500,100);
+                    messageText.setLocation(300, 600);
+                    messageText.setVisible(true);
                 }
                 
             }

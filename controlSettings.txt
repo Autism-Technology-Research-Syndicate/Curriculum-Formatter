@@ -13,3 +13,4 @@ Animations of tasks: w
 Conversational AI: e
 Eye contact maintaining virtual avatar: r
 In-person partner finding instruction paired with activity: t
+Enter: enter
