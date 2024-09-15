@@ -662,39 +662,56 @@ public class menu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Save settings");
-                try (BufferedWriter writer3 = new BufferedWriter(new FileWriter("controlSettings.txt", false))) {
-                    try {
-                        writer3.write(preview.getText());
+
+                boolean single = true;
+                for (int y = 0; y < keyList.size(); y++) {
+                    String givenKey = keyList.get(y);
+                    for (int z = 1; z < keyList.size(); z++) {
+                        if (givenKey.equals(keyList.get(z))) {
+                            single = false;
+                            break;
+                        }
+                    }
+                }
+
+                if (single == true) {
+                    try (BufferedWriter writer3 = new BufferedWriter(new FileWriter("controlSettings.txt", false))) {
+                        try {
+                            writer3.write(preview.getText());
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        writer3.close();
+    
+                        File file = new File("controlSettings.txt");
+                        try (Scanner reader = new Scanner(file)) {
+                            ArrayList<String> controlList = new ArrayList<>();
+                        while(reader.hasNextLine()) {
+                            controlList.add(reader.nextLine());
+                        }
+    
+                        reader.close();
+    
+                        //System.out.println(controlList.toString());
+    
+                        for (int x = 0; x < controlList.size(); x++) {
+                            int colonIndex = controlList.get(x).indexOf(":");
+                            optionList.set(x, controlList.get(x).substring(0, colonIndex));
+                            keyList.set(x, controlList.get(x).substring(colonIndex+2));
+                        }
+                        System.out.println(optionList.toString());
+                        System.out.println(keyList.toString());
+    
+                        } catch (FileNotFoundException e1) {
+                            e1.printStackTrace();
+                        }
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
-                    writer3.close();
-
-                    File file = new File("controlSettings.txt");
-                    try (Scanner reader = new Scanner(file)) {
-                        ArrayList<String> controlList = new ArrayList<>();
-                    while(reader.hasNextLine()) {
-                        controlList.add(reader.nextLine());
-                    }
-
-                    reader.close();
-
-                    System.out.println(controlList.toString());
-
-                    for (int x = 0; x < controlList.size(); x++) {
-                        int colonIndex = controlList.get(x).indexOf(":");
-                        optionList.set(x, controlList.get(x).substring(0, colonIndex));
-                        keyList.set(x, controlList.get(x).substring(colonIndex+2));
-                    }
-                    System.out.println(optionList.toString());
-                    System.out.println(keyList.toString());
-
-                    } catch (FileNotFoundException e1) {
-                        e1.printStackTrace();
-                    }
-                } catch (IOException e1) {
-                    e1.printStackTrace();
+                } else {
+                    System.out.println("No key should have the same value or letter");
                 }
+                
             }
         });
 
