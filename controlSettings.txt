@@ -1,0 +1,15 @@
+Talking: 1
+Eye Contact: 2
+Emotion: 3
+Typing: 4
+Multiple Choice: 5
+Slider: 6
+Pinging host for validating completed activity: q
+Video Lessons: 7
+Reading: 8
+Teacher instruction: 9
+Pictures/diagrams: 0
+Animations of tasks: w
+Conversational AI: e
+Eye contact maintaining virtual avatar: r
+In-person partner finding instruction paired with activity: t

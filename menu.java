@@ -57,8 +57,6 @@ public class menu {
     private static JButton settings;
     private static JButton save;
 
-    private static JTextArea preview2;
-    private static JScrollPane controlSettings;
 
     public menu() {
         //Setting up input options
@@ -89,8 +87,6 @@ public class menu {
         preview = new JTextArea("", 100, 100);
         scrollPane = new JScrollPane(preview);
 
-        preview2 = new JTextArea("", 100, 100);
-        controlSettings = new JScrollPane(preview2);
 
         group.add(j1);
         group.add(j2);
@@ -610,14 +606,38 @@ public class menu {
                 label2.setVisible(false);
                 label3.setVisible(false);
 
+                logo.setVisible(false);
+
                 enter.setVisible(false);
                 enter.setEnabled(false);
 
                 save.setVisible(true);
                 save.setEnabled(true);
 
-                scrollPane.setVisible(false);
-                scrollPane.setEnabled(false);
+                scrollPane.setVisible(true);
+                scrollPane.setEnabled(true);
+                scrollPane.getParent().setComponentZOrder(scrollPane, 0);
+
+                preview.setText("");
+
+                File file = new File("controlSettings.txt");
+                    try (Scanner reader = new Scanner(file)) {
+                        ArrayList<String> controlList = new ArrayList<>();
+                        while(reader.hasNextLine()) {
+                            controlList.add(reader.nextLine());
+                        }
+
+                        reader.close();
+
+                        System.out.println(controlList.toString());
+
+                        for (int x = 0; x < controlList.size(); x++) {
+                            preview.append(controlList.get(x) + "\n");
+                        }
+
+                    } catch (FileNotFoundException e1) {
+                        e1.printStackTrace();
+                    }
             }
 
         });
@@ -626,7 +646,16 @@ public class menu {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Save settings");
-                
+                try (BufferedWriter writer3 = new BufferedWriter(new FileWriter("controlSettings.txt", false))) {
+                    try {
+                        writer3.write(preview.getText());
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                    writer3.close();
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
 
@@ -877,11 +906,7 @@ public class menu {
         scrollPane.setVisible(false);
         scrollPane.setEnabled(false);
 
-        controlSettings.setSize(925, 500);
-        controlSettings.setLocation(25,0);
-        controlSettings.setVisible(false);
-        controlSettings.setEnabled(false);
-        frame.add(controlSettings);
+        frame.add(scrollPane);
 
         while (frame.isActive()) {
             if (j5.isSelected() && pageState == 0) {
