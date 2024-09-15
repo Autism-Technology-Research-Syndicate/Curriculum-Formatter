@@ -54,6 +54,12 @@ public class menu {
 
     private static JLabel background;
 
+    private static JButton settings;
+    private static JButton save;
+
+    private static JTextArea preview2;
+    private static JScrollPane controlSettings;
+
     public menu() {
         //Setting up input options
         j1 = new JRadioButton("Talking");
@@ -77,9 +83,14 @@ public class menu {
         //Setting up Enter and Next Page button.
         enter = new JButton("Enter");
         nextPage = new JButton("View Content");
+        settings = new JButton("Settings");
+        save = new JButton("Save");
 
         preview = new JTextArea("", 100, 100);
         scrollPane = new JScrollPane(preview);
+
+        preview2 = new JTextArea("", 100, 100);
+        controlSettings = new JScrollPane(preview2);
 
         group.add(j1);
         group.add(j2);
@@ -323,6 +334,9 @@ public class menu {
                     enter.setVisible(false);
                     enter.setEnabled(false);
 
+                    save.setVisible(false);
+                    save.setEnabled(false);
+
                     logo.setVisible(false);
 
                     scrollPane.setVisible(true);
@@ -374,7 +388,80 @@ public class menu {
                     }
 
                     pageState++;
-                } else {
+                } else if (pageState == 1) {
+                    nextPage.setText("View Content");
+
+                    j1.setVisible(true);
+                    j1.setEnabled(true);
+
+                    j2.setVisible(true);
+                    j2.setEnabled(true);
+
+                    j3.setVisible(true);
+                    j3.setEnabled(true);
+
+                    j4.setVisible(true);
+                    j4.setEnabled(true);
+
+                    j5.setVisible(true);
+                    j5.setEnabled(true);
+
+                    j6.setVisible(true);
+                    j6.setEnabled(true);
+
+                    j7.setVisible(true);
+                    j7.setEnabled(true);
+
+                    j8.setVisible(true);
+                    j8.setEnabled(true);
+
+                    j9.setVisible(true);
+                    j9.setEnabled(true);
+
+                    j10.setVisible(true);
+                    j10.setEnabled(true);
+
+                    j11.setVisible(true);
+                    j11.setEnabled(true);
+
+                    j12.setVisible(true);
+                    j12.setEnabled(true);
+
+                    j13.setVisible(true);
+                    j13.setEnabled(true);
+
+                    j14.setVisible(true);
+                    j14.setEnabled(true);
+
+                    j15.setVisible(true);
+                    j15.setEnabled(true);
+
+                    sequenceText.setVisible(true);
+                    sequenceText.setEnabled(true);
+
+                    contentText.setVisible(true);
+                    contentText.setEnabled(true);
+
+                    label1.setVisible(true);
+                    label2.setVisible(true);
+                    label3.setVisible(true);
+
+                    enter.setVisible(true);
+                    enter.setEnabled(true);
+
+                    save.setVisible(false);
+                    save.setEnabled(false);
+
+                    logo.setVisible(true);
+
+                    scrollPane.setVisible(false);
+                    scrollPane.setEnabled(false);
+
+                    preview.setText("");
+                    
+                    pageState--;
+                }
+                else {
                     nextPage.setText("View Content");
 
                     j1.setVisible(true);
@@ -442,11 +529,105 @@ public class menu {
 
                     preview.setText("");
                     
-                    pageState--;
+                    pageState = 0;
+                    
                 }
 
             }
             
+        });
+
+        settings.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Settings clicked");
+                pageState = 2;
+
+                nextPage.setText("Home");
+
+                j1.setVisible(false);
+                j1.setEnabled(false);
+
+                j2.setVisible(false);
+                j2.setEnabled(false);
+
+                j3.setVisible(false);
+                j3.setEnabled(false);
+
+                j4.setVisible(false);
+                j4.setEnabled(false);
+
+                j5.setVisible(false);
+                j5.setEnabled(false);
+
+                j6.setVisible(false);
+                j6.setEnabled(false);
+
+                j7.setVisible(false);
+                j7.setEnabled(false);
+
+                j8.setVisible(false);
+                j8.setEnabled(false);
+
+                j9.setVisible(false);
+                j9.setEnabled(false);
+
+                j10.setVisible(false);
+                j10.setEnabled(false);
+
+                j11.setVisible(false);
+                j11.setEnabled(false);
+
+                j12.setVisible(false);
+                j12.setEnabled(false);
+
+                j13.setVisible(false);
+                j13.setEnabled(false);
+
+                j14.setVisible(false);
+                j14.setEnabled(false);
+
+                j15.setVisible(false);
+                j15.setEnabled(false);
+
+                option1Text.setVisible(false);
+                option1Text.setEnabled(false);
+                option2Text.setVisible(false);
+                option2Text.setEnabled(false);
+                option3Text.setVisible(false);
+                option3Text.setEnabled(false);
+                option4Text.setVisible(false);
+                option4Text.setEnabled(false);
+
+                sequenceText.setVisible(false);
+                sequenceText.setEnabled(false);
+
+                contentText.setVisible(false);
+                contentText.setEnabled(false);
+
+                label1.setVisible(false);
+                label2.setVisible(false);
+                label3.setVisible(false);
+
+                enter.setVisible(false);
+                enter.setEnabled(false);
+
+                save.setVisible(true);
+                save.setEnabled(true);
+
+                scrollPane.setVisible(false);
+                scrollPane.setEnabled(false);
+            }
+
+        });
+
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Save settings");
+                
+            }
         });
 
         sequence = 0;
@@ -667,8 +848,20 @@ public class menu {
         nextPage.setBounds(100, 700, 150, 100);
         nextPage.setBorder(new RoundButton(15));
 
+        settings.setBackground(color3);
+        settings.setFont(new Font("Helvetica Neue", Font.BOLD,15));
+        settings.setBounds(450, 700, 100, 100);
+        settings.setBorder(new RoundButton(15));
+
+        save.setBackground(color3);
+        save.setFont(new Font("Helvetica Neue", Font.BOLD,25));
+        save.setBounds(800, 700, 100, 100);
+        save.setBorder(new RoundButton(15));
+
         frame.add(enter);
         frame.add(nextPage);
+        frame.add(settings);
+        frame.add(save);
 
         background = new JLabel(new ImageIcon("gradient.png"));
         background.setLocation(0, 0);
@@ -683,7 +876,12 @@ public class menu {
         scrollPane.setLocation(25,0);
         scrollPane.setVisible(false);
         scrollPane.setEnabled(false);
-        frame.add(scrollPane);
+
+        controlSettings.setSize(925, 500);
+        controlSettings.setLocation(25,0);
+        controlSettings.setVisible(false);
+        controlSettings.setEnabled(false);
+        frame.add(controlSettings);
 
         while (frame.isActive()) {
             if (j5.isSelected() && pageState == 0) {
