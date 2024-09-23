@@ -667,59 +667,87 @@ public class menu {
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Save settings");
 
-                boolean single = true;
-                for (int y = 0; y < keyList.size(); y++) {
-                    String givenKey = keyList.get(y);
-                    for (int z = 1; z < keyList.size(); z++) {
-                        if (givenKey.equals(keyList.get(z))) {
-                            single = false;
-                            break;
-                        }
+                try (BufferedWriter writer3 = new BufferedWriter(new FileWriter("draftControlSettings.txt", false))) {
+                    try {
+                        writer3.write(preview.getText());
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
                     }
-                }
+                    writer3.close();
 
-                if (single == true) {
-                    try (BufferedWriter writer3 = new BufferedWriter(new FileWriter("controlSettings.txt", false))) {
-                        try {
-                            writer3.write(preview.getText());
-                        } catch (IOException e1) {
-                            e1.printStackTrace();
-                        }
-                        writer3.close();
-    
-                        File file = new File("controlSettings.txt");
-                        try (Scanner reader = new Scanner(file)) {
-                            ArrayList<String> controlList = new ArrayList<>();
+                    File file = new File("controlSettings.txt");
+                    File file2 = new File("draftControlSettings.txt");
+
+                    try (Scanner reader = new Scanner(file); Scanner reader2 = new Scanner(file2)) {
+                        ArrayList<String> controlList = new ArrayList<>();
+                        ArrayList<String> controlList2 = new ArrayList<>();
+                        ArrayList<String> keyList2 = new ArrayList<>();
                         while(reader.hasNextLine()) {
                             controlList.add(reader.nextLine());
                         }
-    
+                        while(reader2.hasNextLine()) {
+                            controlList2.add(reader2.nextLine());
+                        }
+
                         reader.close();
-    
+                        reader2.close();
+
                         //System.out.println(controlList.toString());
-    
+                        //System.out.println(controlList2.toString());
+
                         for (int x = 0; x < controlList.size(); x++) {
                             int colonIndex = controlList.get(x).indexOf(":");
                             optionList.set(x, controlList.get(x).substring(0, colonIndex));
                             keyList.set(x, controlList.get(x).substring(colonIndex+2));
                         }
-                        System.out.println(optionList.toString());
-                        System.out.println(keyList.toString());
-    
-                        } catch (FileNotFoundException e1) {
-                            e1.printStackTrace();
+
+                        for (int y = 0; y < controlList2.size(); y++) {
+                            int colonIndex = controlList2.get(y).indexOf(":");
+                            keyList2.add(controlList2.get(y).substring(colonIndex+2));
                         }
-                    } catch (IOException e1) {
+
+                        System.out.println(keyList.toString());
+                        System.out.println(keyList2.toString());
+
+                        boolean single = true;
+                        
+                        for (int a = 0; a < keyList2.size(); a++) {
+                            int copy = 0;
+                            for (int b = 0; b < keyList2.size(); b++) {
+                                if (keyList2.get(b).equals(keyList2.get(a))) {
+                                    copy++;
+                                }
+                                if (copy > 1) {
+                                    single = false;
+                                    break;
+                                }
+                            }
+                        }
+
+                        System.out.println(single);
+                        if (single == false) {
+                            messageText.setText("No keys should have the same value.");
+                            messageText.setSize(600,100);
+                            messageText.setLocation(400, 600);
+                            messageText.setVisible(true);
+                        } else {
+                            messageText.setText("");
+                            messageText.setSize(400,100);
+                            messageText.setLocation(650, 0);
+                            messageText.setVisible(false);
+                            
+                            BufferedWriter writer4 = new BufferedWriter(new FileWriter("controlSettings.txt", false));
+                            for (int c = 0; c < optionList.size(); c++) {
+                                writer4.write(optionList.get(c) + ": " + keyList2.get(c) + "\n");
+                            }
+                            writer4.close();
+                        }
+
+                    } catch (FileNotFoundException e1) {
                         e1.printStackTrace();
                     }
-                    messageText.setSize(400,100);
-                    messageText.setLocation(650, 0);
-                    messageText.setVisible(false);
-                } else {
-                    messageText.setText("No key should have the same value or letter");
-                    messageText.setSize(500,100);
-                    messageText.setLocation(300, 600);
-                    messageText.setVisible(true);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
                 }
                 
             }
