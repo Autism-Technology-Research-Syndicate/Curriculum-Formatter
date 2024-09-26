@@ -3,6 +3,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
@@ -61,6 +63,8 @@ public class menu {
     private static ArrayList<String> optionList;
     private static int addCount;
 
+    private static int keyPressState;
+
     public menu() {
         //Setting up input options
         j1 = new JRadioButton("Talking");
@@ -93,6 +97,7 @@ public class menu {
         optionList = new ArrayList<>();
         keyList = new ArrayList<>();
         addCount = 0;
+        keyPressState = 0;
 
         group.add(j1);
         group.add(j2);
@@ -728,7 +733,7 @@ public class menu {
                         if (single == false) {
                             messageText.setText("No keys should have the same value.");
                             messageText.setSize(600,100);
-                            messageText.setLocation(400, 600);
+                            messageText.setLocation(300, 600);
                             messageText.setVisible(true);
                         } else {
                             messageText.setText("");
@@ -944,6 +949,101 @@ public class menu {
         option4Text.setVisible(false);
         option4Text.setFont(new Font("Helvetica Neue", Font.BOLD,15));
         frame.add(option4Text);
+
+        sequenceText.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                keyPressState = 1;
+                System.out.println("Key state: " + keyPressState);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                keyPressState = 0;
+                System.out.println("Key state: " + keyPressState);
+            }
+        });
+
+        contentText.addFocusListener(new FocusListener() {
+
+            @Override
+            public void focusGained(FocusEvent e) {
+                keyPressState = 1;
+                System.out.println("Key state: " + keyPressState);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                keyPressState = 0;
+                System.out.println("Key state: " + keyPressState);
+            }
+            
+        });
+
+        option1Text.addFocusListener(new FocusListener() {
+
+            @Override
+            public void focusGained(FocusEvent e) {
+                keyPressState = 1;
+                System.out.println("Key state: " + keyPressState);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                keyPressState = 0;
+                System.out.println("Key state: " + keyPressState);
+            }
+            
+        });
+
+        option2Text.addFocusListener(new FocusListener() {
+
+            @Override
+            public void focusGained(FocusEvent e) {
+                keyPressState = 1;
+                System.out.println("Key state: " + keyPressState);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                keyPressState = 0;
+                System.out.println("Key state: " + keyPressState);
+            }
+            
+        });
+
+        option3Text.addFocusListener(new FocusListener() {
+
+            @Override
+            public void focusGained(FocusEvent e) {
+                keyPressState = 1;
+                System.out.println("Key state: " + keyPressState);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                keyPressState = 0;
+                System.out.println("Key state: " + keyPressState);
+            }
+            
+        });
+
+        option4Text.addFocusListener(new FocusListener() {
+
+            @Override
+            public void focusGained(FocusEvent e) {
+                keyPressState = 1;
+                System.out.println("Key state: " + keyPressState);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                keyPressState = 0;
+                System.out.println("Key state: " + keyPressState);
+            }
+            
+        });
+
 
         JLabel question = new JLabel("Choices");
         question.setSize(100,100);
