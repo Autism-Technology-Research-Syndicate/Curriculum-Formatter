@@ -61,11 +61,10 @@ public class menu {
 
     private static ArrayList<String> keyList;
     private static ArrayList<String> optionList;
-    private static int addCount;
 
     private static int keyPressState;
 
-    public menu() {
+    public menu() throws FileNotFoundException {
         //Setting up input options
         j1 = new JRadioButton("Talking");
         j2 = new JRadioButton("Eye Contact");
@@ -96,7 +95,6 @@ public class menu {
 
         optionList = new ArrayList<>();
         keyList = new ArrayList<>();
-        addCount = 0;
         keyPressState = 0;
 
         group.add(j1);
@@ -114,6 +112,23 @@ public class menu {
         group.add(j13);
         group.add(j14);
         group.add(j15);
+
+        File file = new File("controlSettings.txt");
+        try (Scanner reader = new Scanner(file)) {
+            ArrayList<String> controlList = new ArrayList<>();
+            while(reader.hasNextLine()) {
+                controlList.add(reader.nextLine());
+            }
+
+            reader.close();
+
+            for (int x = 0; x < controlList.size(); x++) {
+                preview.append(controlList.get(x) + "\n");
+                int colonIndex = controlList.get(x).indexOf(":");
+                optionList.add(controlList.get(x).substring(0, colonIndex));
+                keyList.add(controlList.get(x).substring(colonIndex+2));
+            }
+        }
 
         enter.addActionListener(new ActionListener() {
 
@@ -647,18 +662,9 @@ public class menu {
                     for (int x = 0; x < controlList.size(); x++) {
                         preview.append(controlList.get(x) + "\n");
                         int colonIndex = controlList.get(x).indexOf(":");
-                        if (addCount == 0) {
-                            optionList.add(controlList.get(x).substring(0, colonIndex));
-                            keyList.add(controlList.get(x).substring(colonIndex+2));
-                        } else {
-                            optionList.set(x, controlList.get(x).substring(0, colonIndex));
-                            keyList.set(x, controlList.get(x).substring(colonIndex+2));
-                        }
+                        optionList.set(x, controlList.get(x).substring(0, colonIndex));
+                        keyList.set(x, controlList.get(x).substring(colonIndex+2));
                     }
-                    addCount++;
-
-                    System.out.println(optionList.toString());
-                    System.out.println(keyList.toString());
 
                 } catch (FileNotFoundException e1) {
                     e1.printStackTrace();
