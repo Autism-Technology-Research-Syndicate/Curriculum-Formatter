@@ -787,11 +787,11 @@ public class menu {
      * number into the export.txt file in the appropriate format.
      * @throws IOException
      */
-    public static void setUpGUI() throws IOException {
+    public static void setUpGUI() throws IOException  {
         menu menu = new menu();
 
 
-        JFrame frame = new JFrame("SEAL App GUI");
+        MyFrame frame = new MyFrame("SEAL App GUI");
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 try {
