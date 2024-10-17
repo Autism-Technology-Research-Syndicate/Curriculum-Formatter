@@ -22,7 +22,7 @@ import java.util.Scanner;
 import javax.swing.*;
 
 public class menu {
-    private ButtonGroup group = new ButtonGroup();
+    private static ButtonGroup group;
     private static JRadioButton j1, j2, j3, j4, j5, j6, j7, j8, j9, j10, j11, j12, j13, j14, j15;
     private static JButton enter;
     private static JButton nextPage;
@@ -97,6 +97,7 @@ public class menu {
         keyList = new ArrayList<>();
         keyPressState = 0;
 
+        group = new ButtonGroup();
         group.add(j1);
         group.add(j2);
         group.add(j3);
@@ -810,6 +811,9 @@ public class menu {
         frame.setSize(1000, 1000);
         frame.setLayout(null);
 
+        frame.setControls(keyList);
+        frame.setLabels(optionList);
+
         label1 = new JLabel("Curriculum");
         label1.setSize(110,100);
         label1.setLocation(100, 50);
@@ -1107,6 +1111,25 @@ public class menu {
         scrollPane.setEnabled(false);
 
         frame.add(scrollPane);
+
+        ArrayList<JRadioButton> list = new ArrayList<>();
+        list.add(j1);
+        list.add(j2);
+        list.add(j3);
+        list.add(j4);
+        list.add(j5);
+        list.add(j6);
+        list.add(j7);
+        list.add(j8);
+        list.add(j9);
+        list.add(j10);
+        list.add(j11);
+        list.add(j12);
+        list.add(j13);
+        list.add(j14);
+        list.add(j15);
+
+        frame.setButtons(list);
 
         while (frame.isActive()) {
             if (j5.isSelected() && pageState == 0) {
