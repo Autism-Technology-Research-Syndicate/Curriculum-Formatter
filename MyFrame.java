@@ -10,6 +10,7 @@ public class MyFrame extends JFrame implements KeyListener{
     private ArrayList<JRadioButton> buttons;
     private JButton enterButton;
     private int buttonNum;
+    private int state;
 
     public MyFrame(String title) {
         super(title);
@@ -20,6 +21,7 @@ public class MyFrame extends JFrame implements KeyListener{
         this.keyControls = new ArrayList<>();
         this.labels = new ArrayList<>();
         this.buttonNum = 0;
+        this.state = 0;
     }
 
     @Override
@@ -28,68 +30,74 @@ public class MyFrame extends JFrame implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("Key pressed: " + e.getKeyChar());
+        if (e.getKeyCode() == KeyEvent.VK_ENTER && (state != 1 || state != 2)) {
+            // Enter key pressed
+            System.out.println("Enter key pressed!");
+            enterButton.doClick();
+        } else {
+            System.out.println("Key pressed: " + e.getKeyChar());
 
-        String keyInput = String.valueOf(e.getKeyChar());
-        int index = 0;
+            String keyInput = String.valueOf(e.getKeyChar());
+            int index = 0;
 
-        for (int x = 0; x < keyControls.size(); x++) {
-            if (keyInput.equals(keyControls.get(x))) {
-                index = x;
-                break;
+            for (int x = 0; x < keyControls.size(); x++) {
+                if (keyInput.equals(keyControls.get(x))) {
+                    index = x;
+                    break;
+                }
             }
-        }
 
-        System.out.println(index);
+            System.out.println(index);
 
-        buttonNum = index;
-        JRadioButton selection = new JRadioButton();
+            buttonNum = index;
+            JRadioButton selection = new JRadioButton();
 
-        if (index == 0) {
-            selection = buttons.get(buttonNum);
-            selection.setSelected(true);
-        } else if (index == 1) {
-            selection = buttons.get(buttonNum);
-            selection.setSelected(true);
-        } else if (index == 2) {
-            selection = buttons.get(buttonNum);
-            selection.setSelected(true);
-        } else if (index == 3) {
-            selection = buttons.get(buttonNum);
-            selection.setSelected(true);
-        } else if (index == 4) {
-            selection = buttons.get(buttonNum);
-            selection.setSelected(true);
-        } else if (index == 5) {
-            selection = buttons.get(buttonNum);
-            selection.setSelected(true);
-        } else if (index == 6) {
-            selection = buttons.get(buttonNum);
-            selection.setSelected(true);
-        } else if (index == 7) {
-            selection = buttons.get(buttonNum);
-            selection.setSelected(true);
-        } else if (index == 8) {
-            selection = buttons.get(buttonNum);
-            selection.setSelected(true);
-        } else if (index == 9) {
-            selection = buttons.get(buttonNum);
-            selection.setSelected(true);
-        } else if (index == 10) {
-            selection = buttons.get(buttonNum);
-            selection.setSelected(true);
-        } else if (index == 11) {
-            selection = buttons.get(buttonNum);
-            selection.setSelected(true);
-        } else if (index == 12) {
-            selection = buttons.get(buttonNum);
-            selection.setSelected(true);
-        } else if (index == 13) {
-            selection = buttons.get(buttonNum);
-            selection.setSelected(true);
-        } else if (index == 14) {
-            selection = buttons.get(buttonNum);
-            selection.setSelected(true);
+            if (index == 0) {
+                selection = buttons.get(buttonNum);
+                selection.setSelected(true);
+            } else if (index == 1) {
+                selection = buttons.get(buttonNum);
+                selection.setSelected(true);
+            } else if (index == 2) {
+                selection = buttons.get(buttonNum);
+                selection.setSelected(true);
+            } else if (index == 3) {
+                selection = buttons.get(buttonNum);
+                selection.setSelected(true);
+            } else if (index == 4) {
+                selection = buttons.get(buttonNum);
+                selection.setSelected(true);
+            } else if (index == 5) {
+                selection = buttons.get(buttonNum);
+                selection.setSelected(true);
+            } else if (index == 6) {
+                selection = buttons.get(buttonNum);
+                selection.setSelected(true);
+            } else if (index == 7) {
+                selection = buttons.get(buttonNum);
+                selection.setSelected(true);
+            } else if (index == 8) {
+                selection = buttons.get(buttonNum);
+                selection.setSelected(true);
+            } else if (index == 9) {
+                selection = buttons.get(buttonNum);
+                selection.setSelected(true);
+            } else if (index == 10) {
+                selection = buttons.get(buttonNum);
+                selection.setSelected(true);
+            } else if (index == 11) {
+                selection = buttons.get(buttonNum);
+                selection.setSelected(true);
+            } else if (index == 12) {
+                selection = buttons.get(buttonNum);
+                selection.setSelected(true);
+            } else if (index == 13) {
+                selection = buttons.get(buttonNum);
+                selection.setSelected(true);
+            } else if (index == 14) {
+                selection = buttons.get(buttonNum);
+                selection.setSelected(true);
+            }
         }
     }
 
@@ -123,6 +131,14 @@ public class MyFrame extends JFrame implements KeyListener{
         return this.buttons;
     }
 
+    public void setEnterButton(JButton enter) {
+        this.enterButton = enter;
+    }
+
+    public JButton getEnterButton() {
+        return this.enterButton;
+    }
+
     public void setButtonNum(int num) {
         this.buttonNum = num;
     }
@@ -131,4 +147,11 @@ public class MyFrame extends JFrame implements KeyListener{
         return this.buttonNum;
     }
     
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public int getState() {
+        return this.state;
+    }
 }

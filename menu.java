@@ -971,6 +971,7 @@ public class menu {
             public void focusLost(FocusEvent e) {
                 keyPressState = 0;
                 System.out.println("Key state: " + keyPressState);
+                frame.requestFocus();
             }
         });
 
@@ -986,6 +987,7 @@ public class menu {
             public void focusLost(FocusEvent e) {
                 keyPressState = 0;
                 System.out.println("Key state: " + keyPressState);
+                frame.requestFocus();
             }
             
         });
@@ -1002,6 +1004,7 @@ public class menu {
             public void focusLost(FocusEvent e) {
                 keyPressState = 0;
                 System.out.println("Key state: " + keyPressState);
+                frame.requestFocus();
             }
             
         });
@@ -1018,6 +1021,7 @@ public class menu {
             public void focusLost(FocusEvent e) {
                 keyPressState = 0;
                 System.out.println("Key state: " + keyPressState);
+                frame.requestFocus();
             }
             
         });
@@ -1034,6 +1038,7 @@ public class menu {
             public void focusLost(FocusEvent e) {
                 keyPressState = 0;
                 System.out.println("Key state: " + keyPressState);
+                frame.requestFocus();
             }
             
         });
@@ -1050,6 +1055,7 @@ public class menu {
             public void focusLost(FocusEvent e) {
                 keyPressState = 0;
                 System.out.println("Key state: " + keyPressState);
+                frame.requestFocus();
             }
             
         });
@@ -1130,6 +1136,8 @@ public class menu {
         list.add(j15);
 
         frame.setButtons(list);
+        frame.setEnterButton(enter);
+        frame.setState(pageState);
 
         while (frame.isActive()) {
             if (j5.isSelected() && pageState == 0) {
