@@ -1,3 +1,4 @@
+package mypack;
 import java.awt.*;
 import javax.swing.border.Border;
 
@@ -5,7 +6,7 @@ public class RoundButton implements Border
 {
     private int r;
 
-    RoundButton(int r) {
+    public RoundButton(int r) {
         this.r = r;
     }
 
