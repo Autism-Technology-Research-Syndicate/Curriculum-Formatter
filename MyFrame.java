@@ -38,7 +38,7 @@ public class MyFrame extends JFrame implements KeyListener{
             System.out.println("Key pressed: " + e.getKeyChar());
 
             String keyInput = String.valueOf(e.getKeyChar());
-            int index = 0;
+            int index = -1;
 
             for (int x = 0; x < keyControls.size(); x++) {
                 if (keyInput.equals(keyControls.get(x))) {
@@ -52,49 +52,7 @@ public class MyFrame extends JFrame implements KeyListener{
             buttonNum = index;
             JRadioButton selection = new JRadioButton();
 
-            if (index == 0) {
-                selection = buttons.get(buttonNum);
-                selection.setSelected(true);
-            } else if (index == 1) {
-                selection = buttons.get(buttonNum);
-                selection.setSelected(true);
-            } else if (index == 2) {
-                selection = buttons.get(buttonNum);
-                selection.setSelected(true);
-            } else if (index == 3) {
-                selection = buttons.get(buttonNum);
-                selection.setSelected(true);
-            } else if (index == 4) {
-                selection = buttons.get(buttonNum);
-                selection.setSelected(true);
-            } else if (index == 5) {
-                selection = buttons.get(buttonNum);
-                selection.setSelected(true);
-            } else if (index == 6) {
-                selection = buttons.get(buttonNum);
-                selection.setSelected(true);
-            } else if (index == 7) {
-                selection = buttons.get(buttonNum);
-                selection.setSelected(true);
-            } else if (index == 8) {
-                selection = buttons.get(buttonNum);
-                selection.setSelected(true);
-            } else if (index == 9) {
-                selection = buttons.get(buttonNum);
-                selection.setSelected(true);
-            } else if (index == 10) {
-                selection = buttons.get(buttonNum);
-                selection.setSelected(true);
-            } else if (index == 11) {
-                selection = buttons.get(buttonNum);
-                selection.setSelected(true);
-            } else if (index == 12) {
-                selection = buttons.get(buttonNum);
-                selection.setSelected(true);
-            } else if (index == 13) {
-                selection = buttons.get(buttonNum);
-                selection.setSelected(true);
-            } else if (index == 14) {
+            if (index >= 0 && index <= 14) {
                 selection = buttons.get(buttonNum);
                 selection.setSelected(true);
             }
