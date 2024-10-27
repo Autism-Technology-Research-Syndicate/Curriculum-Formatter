@@ -708,8 +708,8 @@ public class menu {
                         reader.close();
                         reader2.close();
 
-                        //System.out.println(controlList.toString());
-                        //System.out.println(controlList2.toString());
+                        System.out.println(controlList.toString());
+                        System.out.println(controlList2.toString());
 
                         for (int x = 0; x < controlList.size(); x++) {
                             int colonIndex = controlList.get(x).indexOf(":");

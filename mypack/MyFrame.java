@@ -13,6 +13,7 @@ public class MyFrame extends JFrame implements KeyListener{
     private JButton enterButton;
     private int buttonNum;
     private int state;
+    private int enterKey;
 
     public MyFrame(String title) {
         super(title);
@@ -24,6 +25,7 @@ public class MyFrame extends JFrame implements KeyListener{
         this.labels = new ArrayList<>();
         this.buttonNum = 0;
         this.state = 0;
+        this.enterKey = 0;
     }
 
     @Override
@@ -32,7 +34,7 @@ public class MyFrame extends JFrame implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER && (state != 1 || state != 2)) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER && (state != 1 || state != 2) && enterKey == 1) {
             // Enter key pressed
             System.out.println("Enter key pressed!");
             enterButton.doClick();
@@ -57,6 +59,8 @@ public class MyFrame extends JFrame implements KeyListener{
             if (index >= 0 && index <= 14) {
                 selection = buttons.get(buttonNum);
                 selection.setSelected(true);
+            } else if (index == 15) {
+                enterButton.doClick();
             }
         }
     }
@@ -68,6 +72,11 @@ public class MyFrame extends JFrame implements KeyListener{
     public void setControls(ArrayList<String> list) {
         this.keyControls = list;
         System.out.println(this.keyControls.toString());
+        if (this.keyControls.get(15).equals("enter")) {
+            enterKey = 1;
+        } else {
+            enterKey = 2;
+        }
     }
 
     public ArrayList<String> getControls() {
