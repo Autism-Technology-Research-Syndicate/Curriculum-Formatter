@@ -68,6 +68,8 @@ public class menu {
 
     private static int keyPressState;
 
+    private static MyFrame frame;
+
     public menu() throws FileNotFoundException {
         //Setting up input options
         j1 = new JRadioButton("Talking");
@@ -117,6 +119,8 @@ public class menu {
         group.add(j13);
         group.add(j14);
         group.add(j15);
+
+        frame = new MyFrame("SEAL App GUI");
 
         File file = new File("controlSettings.txt");
         try (Scanner reader = new Scanner(file)) {
@@ -757,6 +761,8 @@ public class menu {
                                 writer4.write(optionList.get(c) + ": " + keyList2.get(c) + "\n");
                             }
                             writer4.close();
+
+                            frame.setControls(keyList2);
                         }
 
                     } catch (FileNotFoundException e1) {
@@ -796,7 +802,7 @@ public class menu {
         menu menu = new menu();
 
 
-        MyFrame frame = new MyFrame("SEAL App GUI");
+        frame = new MyFrame("SEAL App GUI");
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 try {

@@ -34,14 +34,15 @@ public class MyFrame extends JFrame implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ENTER && (state != 1 || state != 2) && enterKey == 1) {
-            // Enter key pressed
-            System.out.println("Enter key pressed!");
-            enterButton.doClick();
-        } else {
+        if ((state != 1 || state != 2)) {
             System.out.println("Key pressed: " + e.getKeyChar());
 
-            String keyInput = String.valueOf(e.getKeyChar());
+            String keyInput = "";
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                keyInput = "enter";
+            } else {
+                keyInput = String.valueOf(e.getKeyChar());
+            }
             int index = -1;
 
             for (int x = 0; x < keyControls.size(); x++) {
